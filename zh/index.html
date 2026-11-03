@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>赵凌葳 · 项目展示</title>
 <link rel="alternate" hreflang="en" href="https://tjiewgnil.github.io/">
-<meta name="description" content="两个用 Claude Code 做的项目：评估 LLM 在驾驶智能体里到底有没有用，以及一个 TypeScript 全栈任务管理应用。">
+<meta name="description" content="三个用 Claude Code 做的项目：评估 LLM 在驾驶智能体里到底有没有用、一个 TypeScript 全栈任务管理应用，以及每日邮件摘要。">
 <link rel="stylesheet" href="../assets/site.css">
 <style>
   body { font-family: system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", "Segoe UI", sans-serif; }
@@ -17,8 +17,8 @@
   <div class="wrap">
     <nav class="langbar" aria-label="语言"><a href="../" hreflang="en" lang="en">English</a><span aria-current="page">中文</span></nav>
     <p class="name">赵凌葳 Lingwei Zhao · 查尔姆斯理工大学 计算机科学硕士</p>
-    <h1>两个用 Claude Code 做的项目</h1>
-    <p class="lede">一个是评估语言模型在驾驶智能体里到底在哪儿有用，另一个是我每天都在用的 TypeScript 全栈应用。</p>
+    <h1>三个用 Claude Code 做的项目</h1>
+    <p class="lede">评估语言模型在驾驶智能体里到底在哪儿有用、我每天都在用的 TypeScript 全栈应用，以及一个用 Claude Code routine 运行的每日邮件摘要。</p>
     <div class="meta">
       <span>lingwei@chalmers.se</span>
       <span>瑞典 哥德堡</span>
@@ -27,8 +27,9 @@
     <div class="jump">
       <a href="#driveagent">DriveAgent：LLM 与驾驶智能体</a>
       <a href="#taskplanner">任务管理智能体：TypeScript 全栈</a>
+      <a href="#gmaildigest">gmail-digest：每日邮件摘要</a>
     </div>
-    <p class="how"><strong>我的工作方式。</strong>研究问题、实验设计和通过 / 不通过的标准由我来定，每个结果我都亲自核对。大部分代码由 Claude Code 编写，我负责审查、运行和使用。这两个项目都是这样做出来的。</p>
+    <p class="how"><strong>我的工作方式。</strong>研究问题、实验设计和通过 / 不通过的标准由我来定，每个结果我都亲自核对。大部分代码由 Claude Code 编写，我负责审查、运行和使用。这三个项目都是这样做出来的。</p>
   </div>
 </header>
 
@@ -147,6 +148,43 @@
     <div class="chips">
       <span class="chip">TypeScript</span><span class="chip">Node.js · Express</span><span class="chip">Prisma · SQLite</span>
       <span class="chip">React · Vite</span><span class="chip">zod</span><span class="chip">REST API</span><span class="chip">Claude Code CLI</span>
+    </div>
+  </section>
+
+  <hr class="sep">
+
+  <!-- ============ gmail-digest ============ -->
+  <section class="project" id="gmaildigest">
+    <p class="kicker">项目三 · Python、Gmail API、Claude Code routine · 2026 年 10 月</p>
+    <h2>gmail-digest：把所有邮箱汇成一份每日摘要</h2>
+    <p class="sub">我把学校邮箱和个人邮箱都转发到同一个 Gmail。每天由 Claude Code 云端 routine 读取过去 24 小时的邮件，按一份纯文本提示词里写的规则分类，再给我发一封简短的摘要：哪些需要处理、哪些是真人写来的，其余的只用一行统计。</p>
+
+    <div class="flow" role="img" aria-label="流程：其他邮箱转发到 Gmail；fetch_inbox.py 通过 Gmail API 读取过去 24 小时；Claude 按 ROUTINE.md 筛选和总结；send_digest.py 发出摘要；手机收到通知">
+      <div class="step">其他邮箱<small>转发到 Gmail</small></div><span class="arr">→</span>
+      <div class="step">fetch_inbox.py<small>Gmail API，过去 24 小时</small></div><span class="arr">→</span>
+      <div class="step">Claude<small>按 ROUTINE.md 筛选、总结</small></div><span class="arr">→</span>
+      <div class="step">send_digest.py<small>Gmail API</small></div><span class="arr">→</span>
+      <div class="step">手机<small>每天一条通知</small></div>
+    </div>
+
+    <figure class="narrow">
+      <img src="../assets/digest-zh.png" alt="每日邮件摘要示例：今日重点、需行动、真人直接联系，其他邮件折叠成一行统计" loading="lazy">
+      <figcaption>一份示例摘要，里面的邮件都是虚构的。</figcaption>
+    </figure>
+
+    <h3>设计取舍</h3>
+    <ul class="clean">
+      <li><strong>走 Gmail API（HTTPS）。</strong>routine 的云端沙箱封了 IMAP 和 SMTP，所以收信和发信都通过 Gmail API。</li>
+      <li><strong>不需要 API key。</strong>筛选和总结由运行 routine 的 Claude 自己完成，规则写在 <code>ROUTINE.md</code> 里，谁都可以改。</li>
+      <li><strong>只用标准库。</strong>Python 约 770 行，不用 <code>pip install</code>。配置向导会走完 OAuth 授权、写好配置，并测试收信和发信。</li>
+      <li><strong>方便别人复用。</strong>配置、转发其他邮箱、手机通知都有中英文分步指南。</li>
+    </ul>
+
+    <div class="links">
+      <a class="btn primary" href="https://github.com/TJiewgnil/gmail-digest/blob/main/README.zh-CN.md">GitHub 上的代码和说明</a>
+    </div>
+    <div class="chips">
+      <span class="chip">Python 标准库</span><span class="chip">Gmail API · OAuth</span><span class="chip">Claude Code 云端 routine</span><span class="chip">用提示词做配置</span>
     </div>
   </section>
 

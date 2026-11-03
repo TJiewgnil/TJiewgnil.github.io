@@ -84,3 +84,9 @@ footer { padding: 40px 0 56px; font-size: 14px; color: var(--muted); }
   .row .label { grid-column: 1 / -1; margin-bottom: -4px; }
   header.top { padding-top: 48px; }
 }
+.flow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 18px 0; }
+.flow .step { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: 14px; line-height: 1.35; }
+.flow .step small { display: block; color: var(--muted); font-size: 12px; margin-top: 2px; }
+.flow .arr { color: var(--faint); font-size: 18px; }
+figure.narrow img { max-width: 640px; }
+@media (max-width: 760px) { .flow { flex-direction: column; align-items: stretch; } .flow .arr { transform: rotate(90deg); text-align: center; } }

@@ -44,18 +44,18 @@
     <div class="grid3">
       <div class="stat">
         <div class="big">0.609 m</div>
-        <div class="vs">18 维特征 MLP 的轨迹误差</div>
-        <div class="what"><strong>规划：LLM 帮不上忙。</strong>这个小 MLP 胜过 LLM 智能体和 12 个蒸馏出来的小模型。</div>
+        <div class="vs">18 维特征 MLP 的 L2 误差，6,019 帧验证集</div>
+        <div class="what"><strong>规划：LLM 没有带来可靠的提升。</strong>这个 MLP 的误差低于 LLM 智能体，12 个蒸馏小模型也没有一个超过它。</div>
       </div>
       <div class="stat">
         <div class="big">81.6%</div>
         <div class="vs">对比 CLIP 68.5%、关键词规则 53.1%</div>
-        <div class="what"><strong>把话对应到物体：明显有用。</strong>LLM 能找出乘客指的是哪个物体。</div>
+        <div class="what"><strong>把话对应到物体：LLM 有用。</strong>找对乘客所指物体的比例高于 CLIP 和关键词规则。</div>
       </div>
       <div class="stat">
         <div class="big">+20 个百分点</div>
-        <div class="vs">LLM 整理事实，代码做决定</div>
-        <div class="what"><strong>最好的做法。</strong>LLM 把杂乱的输入整理成结构化事实，再由确定性的代码执行规则。</div>
+        <div class="vs">对比同一个 LLM 自己决定，384 条请求</div>
+        <div class="what"><strong>测试过的方案里最好。</strong>LLM 把杂乱的输入整理成结构化事实，再由确定性的代码执行规则。</div>
       </div>
     </div>
 
@@ -72,15 +72,15 @@
       <li><strong>LLM 只负责整理。</strong>它把乘客的话变成结构化字段：指的哪个物体、要做什么、停在哪、有没有明说要违规。</li>
       <li><strong>代码负责决定。</strong>确定性规则对照地图检查这些字段，再决定照做、调整、拒绝还是追问。286 条自然说法里，判对 89.9%；关键词加同一套代码只有 59.8%。</li>
       <li><strong>拿不准就问，不乱猜。</strong>在 148 条新收集的指令上，"不吭声地做错"从 44.6%（关键词）降到 8.8%。</li>
-      <li><strong>评估不放水。</strong>LLM 评审先和人工标注比对，一致率达到 95% 才使用。结果都附场景级 bootstrap 置信区间和 McNemar 检验。</li>
+      <li><strong>评审先校准。</strong>LLM 评审先和人工标注比对，一致率达到 95% 才使用。结果都附场景级 bootstrap 置信区间和 McNemar 检验。</li>
     </ul>
 
     <figure>
       <picture>
         <source media="(prefers-color-scheme: dark)" srcset="../assets/forest_zh_dark.png">
-        <img src="../assets/forest_zh_light.png" alt="森林图：规划方面的比较全部跨过 0；乘客交互方面的比较都偏向 LLM，领先 11 到 30 个百分点" loading="lazy">
+        <img src="../assets/forest_zh_light.png" alt="森林图：规划方面的比较全部跨过 0；乘客交互方面 LLM 领先 11 到 30 个百分点，8 个区间里有 7 个在 0 以上" loading="lazy">
       </picture>
-      <figcaption>每一项比较都是事先计划好的。规划方面的差异全部跨过 0；交互方面 LLM 领先 11–30 个百分点。</figcaption>
+      <figcaption>每一项比较都是事先计划好的。规划方面，所有 95% 置信区间都跨过 0。乘客交互方面，LLM 领先 11–30 个百分点，8 个区间里有 7 个在 0 以上。</figcaption>
     </figure>
 
     <figure>
@@ -157,7 +157,7 @@
   <section class="project" id="gmaildigest">
     <p class="kicker">项目三 · Python、Gmail API、Claude Code routine · 2026 年 10 月</p>
     <h2>gmail-digest：把所有邮箱汇成一份每日摘要</h2>
-    <p class="sub">我把学校邮箱和个人邮箱都转发到同一个 Gmail。每天由 Claude Code 云端 routine 读取过去 24 小时的邮件，按一份纯文本提示词里写的规则分类，再给我发一封简短的摘要：哪些需要处理、哪些是真人写来的，其余的只用一行统计。</p>
+    <p class="sub">我把学校邮箱和个人邮箱都转发到同一个 Gmail。每天由 Claude Code 云端 routine 读取过去 24 小时的邮件，按一份纯文本提示词里的规则分类。然后它给我发一封简短的摘要：哪些需要处理、哪些是真人写来的，其余的只用一行统计。</p>
 
     <div class="flow" role="img" aria-label="流程：其他邮箱转发到 Gmail；fetch_inbox.py 通过 Gmail API 读取过去 24 小时；Claude 按 ROUTINE.md 筛选和总结；send_digest.py 发出摘要；手机收到通知">
       <div class="step">其他邮箱<small>转发到 Gmail</small></div><span class="arr">→</span>
@@ -175,7 +175,7 @@
     <h3>设计取舍</h3>
     <ul class="clean">
       <li><strong>走 Gmail API（HTTPS）。</strong>routine 的云端沙箱封了 IMAP 和 SMTP，所以收信和发信都通过 Gmail API。</li>
-      <li><strong>不需要 API key。</strong>筛选和总结由运行 routine 的 Claude 自己完成，规则写在 <code>ROUTINE.md</code> 里，谁都可以改。</li>
+      <li><strong>不需要 API key。</strong>筛选和总结由运行 routine 的 Claude 自己完成。规则写在 <code>ROUTINE.md</code> 里，谁都可以改。</li>
       <li><strong>只用标准库。</strong>Python 约 770 行，不用 <code>pip install</code>。配置向导会走完 OAuth 授权、写好配置，并测试收信和发信。</li>
       <li><strong>方便别人复用。</strong>配置、转发其他邮箱、手机通知都有中英文分步指南。</li>
     </ul>

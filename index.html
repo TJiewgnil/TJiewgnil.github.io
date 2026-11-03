@@ -14,7 +14,7 @@
     <nav class="langbar" aria-label="Language"><span aria-current="page">English</span><a href="zh/" hreflang="zh-CN" lang="zh-CN">中文</a></nav>
     <p class="name">Lingwei Zhao · MSc Computer Science, Chalmers University of Technology</p>
     <h1>Three projects I built with Claude Code</h1>
-    <p class="lede">An evaluation of where a language model actually helps a driving agent, a full-stack TypeScript app that I use every day, and a daily email digest that runs as a Claude Code routine.</p>
+    <p class="lede">An evaluation of where a language model helps a driving agent, a full-stack TypeScript app that I use every day, and a daily email digest that runs as a Claude Code routine.</p>
     <div class="meta">
       <span>lingwei@chalmers.se</span>
       <span>Gothenburg, Sweden</span>
@@ -40,18 +40,18 @@
     <div class="grid3">
       <div class="stat">
         <div class="big">0.609 m</div>
-        <div class="vs">trajectory error of an 18-feature MLP</div>
-        <div class="what"><strong>Planning: the LLM does not help.</strong> The small MLP beats the LLM agent and 12 distilled students.</div>
+        <div class="vs">L2 error of an 18-feature MLP, 6,019 validation frames</div>
+        <div class="what"><strong>Planning: no reliable gain from the LLM.</strong> The MLP has lower error than the LLM agent, and none of 12 distilled students beat it.</div>
       </div>
       <div class="stat">
         <div class="big">81.6%</div>
         <div class="vs">vs 68.5% CLIP, 53.1% keyword rules</div>
-        <div class="what"><strong>Matching words to objects: it clearly does.</strong> The LLM finds the object a passenger means.</div>
+        <div class="what"><strong>Matching words to objects: the LLM helps.</strong> It finds the object a passenger means more often than CLIP or keyword rules.</div>
       </div>
       <div class="stat">
         <div class="big">+20 pts</div>
-        <div class="vs">LLM structures, code decides</div>
-        <div class="what"><strong>Best design.</strong> The LLM turns messy input into structured facts, and deterministic code applies the rules.</div>
+        <div class="vs">vs the same LLM deciding alone, 384 requests</div>
+        <div class="what"><strong>Best design tested.</strong> The LLM turns messy input into structured facts, and deterministic code applies the rules.</div>
       </div>
     </div>
 
@@ -68,15 +68,15 @@
       <li><strong>The LLM only structures.</strong> It turns a passenger's words into fields: which object, what request, where to stop, any explicit rule-breaking.</li>
       <li><strong>Code decides.</strong> Deterministic rules check those fields against the map and choose to comply, adjust, refuse or ask. On 286 natural requests this was right 89.9% of the time, against 59.8% for keywords with the same code.</li>
       <li><strong>Ask instead of guess.</strong> On 148 fresh crowd-sourced commands, silent wrong actions fell from 44.6% (keywords) to 8.8%.</li>
-      <li><strong>Measured honestly.</strong> An LLM judge was used only after it agreed with human labels in 95% of cases. Results come with scene-level bootstrap confidence intervals and McNemar tests.</li>
+      <li><strong>Judge checked first.</strong> An LLM judge was used only after it agreed with human labels in 95% of cases. Results come with scene-level bootstrap confidence intervals and McNemar tests.</li>
     </ul>
 
     <figure>
       <picture>
         <source media="(prefers-color-scheme: dark)" srcset="assets/forest_en_dark.png">
-        <img src="assets/forest_en_light.png" alt="Forest plot: every planning comparison overlaps zero; every passenger-interaction comparison favours the LLM by 11 to 30 points" loading="lazy">
+        <img src="assets/forest_en_light.png" alt="Forest plot: every planning comparison crosses zero; in passenger interaction the LLM leads by 11 to 30 points, with 7 of 8 intervals above zero" loading="lazy">
       </picture>
-      <figcaption>Every comparison planned before it was run. Planning differences all overlap zero; interaction results favour the LLM by 11–30 points.</figcaption>
+      <figcaption>Every comparison was planned before it was run. In planning, every 95% interval crosses zero. In passenger interaction, the LLM leads by 11–30 points, and 7 of the 8 intervals lie above zero.</figcaption>
     </figure>
 
     <figure>
@@ -126,7 +126,7 @@
       <li><strong>Front end:</strong> React 18, TypeScript, Vite, Tailwind, TanStack Query, ECharts and drag-and-drop scheduling.</li>
       <li><strong>Back end:</strong> Express and TypeScript, Prisma with SQLite (10 data models), 11 REST route groups and zod validation.</li>
       <li><strong>Progress API:</strong> other sessions <code>POST</code> a JSON report. The server validates it, applies it, stores the old values for undo, and offers a dry-run preview. If the server is offline, reports wait in an inbox and are applied on the next start.</li>
-      <li><strong>Daily check:</strong> a script asks the local Claude Code CLI whether each tracked folder made real progress, judging from file diffs only.</li>
+      <li><strong>Daily check:</strong> a script asks the local Claude Code CLI whether each tracked folder made real progress. It judges from file diffs only.</li>
     </ul>
 <pre>POST /api/progress-reports
 {
@@ -153,7 +153,7 @@
   <section class="project" id="gmaildigest">
     <p class="kicker">Project 3 · Python, Gmail API, Claude Code routine · Oct 2026</p>
     <h2>gmail-digest: one daily digest for all my mailboxes</h2>
-    <p class="sub">I forward my university and personal mailboxes into one Gmail account. Every day a Claude Code cloud routine reads the last 24 hours of mail, sorts it by rules written in a plain-text prompt, and emails me a short digest: what needs action, what real people wrote, and one line that counts everything else.</p>
+    <p class="sub">I forward my university and personal mailboxes into one Gmail account. Every day a Claude Code cloud routine reads the last 24 hours of mail and sorts it by rules written in a plain-text prompt. It then emails me a short digest: what needs action, what real people wrote, and one line that counts everything else.</p>
 
     <div class="flow" role="img" aria-label="Pipeline: other mailboxes forward into Gmail; fetch_inbox.py reads the last 24 hours through the Gmail API; Claude filters and summarises by ROUTINE.md; send_digest.py emails the digest; the phone shows a notification">
       <div class="step">Other mailboxes<small>forward into Gmail</small></div><span class="arr">→</span>
@@ -171,9 +171,9 @@
     <h3>Design choices</h3>
     <ul class="clean">
       <li><strong>Gmail API over HTTPS.</strong> The routine's cloud sandbox blocks IMAP and SMTP, so both reading and sending go through the Gmail API.</li>
-      <li><strong>No API key.</strong> Claude, running the routine, does the filtering and summarising. The rules live in <code>ROUTINE.md</code>, which anyone can edit.</li>
+      <li><strong>No API key.</strong> The Claude session that runs the routine filters and summarises the mail itself. The rules live in <code>ROUTINE.md</code>, which anyone can edit.</li>
       <li><strong>Standard library only.</strong> About 770 lines of Python and no <code>pip install</code>. A setup wizard runs the OAuth flow, writes the config, and tests fetching and sending.</li>
-      <li><strong>Made for others to reuse.</strong> Step-by-step guides in English and Chinese for setup, forwarding other mailboxes and phone notifications.</li>
+      <li><strong>Made for others to reuse.</strong> Step-by-step guides in English and Chinese cover setup, mail forwarding and phone notifications.</li>
     </ul>
 
     <div class="links">

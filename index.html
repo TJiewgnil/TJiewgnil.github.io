@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lingwei Zhao · Projects</title>
+<meta name="description" content="Two projects built with Claude Code: an evaluation of where LLMs help a driving agent, and a full-stack TypeScript task planner.">
+<style>
+  :root {
+    --bg: #fbfaf8; --surface: #ffffff; --ink: #1c1b19; --muted: #5f5b55; --faint: #8b867e;
+    --line: #e7e3dc; --accent: #2f6fdb; --accent-soft: #e8f0fd; --good: #1f8a5a; --bar-bg: #efebe4;
+    --b1: #b9b3a9; --b2: #8fa7cf; --b3: #2f6fdb;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151514; --surface: #1d1d1b; --ink: #f1efea; --muted: #b8b3aa; --faint: #8d887f;
+      --line: #2f2e2b; --accent: #7aa7f5; --accent-soft: #1f2a3d; --good: #5cc195; --bar-bg: #2a2926;
+      --b1: #6b675f; --b2: #5d7bb0; --b3: #7aa7f5;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151514; --surface: #1d1d1b; --ink: #f1efea; --muted: #b8b3aa; --faint: #8d887f;
+    --line: #2f2e2b; --accent: #7aa7f5; --accent-soft: #1f2a3d; --good: #5cc195; --bar-bg: #2a2926;
+    --b1: #6b675f; --b2: #5d7bb0; --b3: #7aa7f5;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 16px; }
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  header.top { padding: 56px 0 28px; border-bottom: 1px solid var(--line); }
+  .name { font-size: 15px; color: var(--muted); margin: 0 0 6px; letter-spacing: .02em; }
+  h1 { font-size: clamp(28px, 4.4vw, 40px); line-height: 1.15; margin: 0 0 14px; letter-spacing: -.01em; }
+  .lede { font-size: 18px; color: var(--muted); max-width: 720px; margin: 0 0 18px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 14px; color: var(--muted); }
+  .jump { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+  .jump a, .btn {
+    display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 999px;
+    border: 1px solid var(--line); background: var(--surface); color: var(--ink); text-decoration: none; font-size: 14px;
+  }
+  .jump a:hover, .btn:hover { border-color: var(--accent); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  :root[data-theme="dark"] .btn.primary { color: #10131a; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn.primary { color: #10131a; } }
+  .how {
+    margin: 28px 0 0; padding: 16px 18px; border-radius: 12px; background: var(--accent-soft);
+    font-size: 15px; color: var(--ink);
+  }
+  section.project { padding: 56px 0 8px; }
+  .kicker { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--faint); margin: 0 0 6px; }
+  h2 { font-size: clamp(24px, 3.4vw, 30px); line-height: 1.2; margin: 0 0 10px; }
+  h3 { font-size: 18px; margin: 34px 0 10px; }
+  p { margin: 0 0 14px; }
+  .sub { color: var(--muted); font-size: 17px; max-width: 760px; }
+  .links { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 6px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 22px 0 6px; }
+  .stat { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
+  .stat .big { font-size: 28px; font-weight: 650; line-height: 1.1; }
+  .stat .vs { font-size: 14px; color: var(--muted); margin-top: 4px; }
+  .stat .what { font-size: 14px; margin-top: 10px; }
+  .chart { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; margin: 18px 0; }
+  .chart .title { font-weight: 600; margin-bottom: 4px; }
+  .chart .note { font-size: 13px; color: var(--muted); margin-bottom: 14px; }
+  .row { display: grid; grid-template-columns: 210px 1fr 56px; gap: 12px; align-items: center; margin: 8px 0; font-size: 14px; }
+  .track { height: 18px; background: var(--bar-bg); border-radius: 4px; overflow: hidden; }
+  .fill { height: 100%; border-radius: 4px; }
+  .val { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+  figure { margin: 18px 0; }
+  figure img { width: 100%; height: auto; display: block; border-radius: 10px; border: 1px solid var(--line); background: #fff; }
+  figcaption { font-size: 13px; color: var(--muted); margin-top: 8px; }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  ul.clean { padding-left: 20px; margin: 0 0 14px; }
+  ul.clean li { margin: 6px 0; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 0; }
+  .chip { font-size: 13px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--muted); }
+  pre {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px; overflow-x: auto;
+    font: 13px/1.5 ui-monospace, SFMono-Regular, Consolas, Menlo, monospace; margin: 12px 0;
+  }
+  hr.sep { border: 0; border-top: 1px solid var(--line); margin: 48px 0 0; }
+  footer { padding: 40px 0 56px; font-size: 14px; color: var(--muted); }
+  @media (max-width: 760px) {
+    .grid3, .pair { grid-template-columns: 1fr; }
+    .row { grid-template-columns: 1fr 48px; }
+    .row .label { grid-column: 1 / -1; margin-bottom: -4px; }
+    header.top { padding-top: 48px; }
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <p class="name">Lingwei Zhao · MSc Computer Science, Chalmers University of Technology</p>
+    <h1>Two projects I built with Claude Code</h1>
+    <p class="lede">An evaluation of where a language model actually helps a driving agent, and a full-stack TypeScript app that I use every day.</p>
+    <div class="meta">
+      <span>lingwei@chalmers.se</span>
+      <span>Gothenburg, Sweden</span>
+      <a href="https://github.com/TJiewgnil">github.com/TJiewgnil</a>
+    </div>
+    <div class="jump">
+      <a href="#driveagent">DriveAgent: LLMs for a driving agent</a>
+      <a href="#taskplanner">Task Planner: TypeScript full stack</a>
+    </div>
+    <p class="how"><strong>How I work.</strong> I decide the questions, design the experiments and the pass/fail rules, and check every result. Claude Code writes most of the code, and I review, run and use it. Both projects were built this way.</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ DriveAgent ============ -->
+  <section class="project" id="driveagent">
+    <p class="kicker">Project 1 · Python, Claude API, nuScenes · Oct 2026</p>
+    <h2>DriveAgent: where does an LLM actually help a driving agent?</h2>
+    <p class="sub">I built a tool-using LLM agent on the nuScenes driving dataset and compared it with simpler methods on held-out test sets. Each test was run once, under rules written down in advance.</p>
+
+    <div class="grid3">
+      <div class="stat">
+        <div class="big">0.609 m</div>
+        <div class="vs">trajectory error of an 18-feature MLP</div>
+        <div class="what"><strong>Planning: the LLM does not help.</strong> The small MLP beats the LLM agent and 12 distilled students.</div>
+      </div>
+      <div class="stat">
+        <div class="big">81.6%</div>
+        <div class="vs">vs 68.5% CLIP, 53.1% keyword rules</div>
+        <div class="what"><strong>Matching words to objects: it clearly does.</strong> The LLM finds the object a passenger means.</div>
+      </div>
+      <div class="stat">
+        <div class="big">+20 pts</div>
+        <div class="vs">LLM structures, code decides</div>
+        <div class="what"><strong>Best design.</strong> The LLM turns messy input into structured facts, and deterministic code applies the rules.</div>
+      </div>
+    </div>
+
+    <div class="chart" role="img" aria-label="Accuracy on 397 Talk2Car commands: keyword rules 53.1 percent, zero-shot CLIP 68.5 percent, Claude Haiku with the camera image 81.6 percent">
+      <div class="title">A matching problem: which object does the passenger mean?</div>
+      <div class="note">Same 397 held-out Talk2Car commands and the same candidate objects for every method. Accuracy, %.</div>
+      <div class="row"><span class="label">Keyword rules</span><div class="track"><div class="fill" style="width:53.1%;background:var(--b1)"></div></div><span class="val">53.1</span></div>
+      <div class="row"><span class="label">Embeddings (zero-shot CLIP)</span><div class="track"><div class="fill" style="width:68.5%;background:var(--b2)"></div></div><span class="val">68.5</span></div>
+      <div class="row"><span class="label">LLM with the camera image</span><div class="track"><div class="fill" style="width:81.6%;background:var(--b3)"></div></div><span class="val">81.6</span></div>
+    </div>
+
+    <h3>What the system does with a request</h3>
+    <ul class="clean">
+      <li><strong>The LLM only structures.</strong> It turns a passenger's words into fields: which object, what request, where to stop, any explicit rule-breaking.</li>
+      <li><strong>Code decides.</strong> Deterministic rules check those fields against the map and choose to comply, adjust, refuse or ask. On 286 natural requests this was right 89.9% of the time, against 59.8% for keywords with the same code.</li>
+      <li><strong>Ask instead of guess.</strong> On 148 fresh crowd-sourced commands, silent wrong actions fell from 44.6% (keywords) to 8.8%.</li>
+      <li><strong>Measured honestly.</strong> An LLM judge was used only after it agreed with human labels in 95% of cases. Results come with scene-level bootstrap confidence intervals and McNemar tests.</li>
+    </ul>
+
+    <figure>
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="assets/forest_en_dark.png">
+        <img src="assets/forest_en_light.png" alt="Forest plot: every planning comparison overlaps zero; every passenger-interaction comparison favours the LLM by 11 to 30 points" loading="lazy">
+      </picture>
+      <figcaption>Every comparison planned before it was run. Planning differences all overlap zero; interaction results favour the LLM by 11–30 points.</figcaption>
+    </figure>
+
+    <figure>
+      <img src="assets/case_04_en.jpg" alt="Example case: passenger asks to stop next to a person; the exact spot is illegal, so the code moves the stop to the nearest legal spot" loading="lazy">
+      <figcaption>One test case. The LLM picks the right person (#8) and extracts the request. The code sees that the exact spot is illegal and moves the stop to a legal one. The keyword pipeline picks the wrong object.</figcaption>
+    </figure>
+
+    <div class="links">
+      <a class="btn primary" href="https://github.com/TJiewgnil/DriveAgent">Code and README on GitHub</a>
+      <a class="btn" href="https://github.com/TJiewgnil/DriveAgent/blob/main/docs/report.pdf">Technical report (PDF, 10 pages)</a>
+      <a class="btn" href="https://tjiewgnil.github.io/DriveAgent/">Browse 43 test cases</a>
+    </div>
+    <div class="chips">
+      <span class="chip">Claude Haiku / Sonnet API</span><span class="chip">function calling</span><span class="chip">structured output</span>
+      <span class="chip">CLIP baseline</span><span class="chip">QLoRA distillation</span><span class="chip">bootstrap CIs · McNemar · Holm</span>
+      <span class="chip">about $32 of API cost in total</span>
+    </div>
+  </section>
+
+  <hr class="sep">
+
+  <!-- ============ Task Planner ============ -->
+  <section class="project" id="taskplanner">
+    <p class="kicker">Project 2 · TypeScript, Node.js, React · Oct 2026</p>
+    <h2>Task Planner: a full-stack app that Claude Code sessions report to</h2>
+    <p class="sub">A local planner I use every day. It lays out the day on a timeline, works out how much I need to do today to meet each deadline, tracks time and shows statistics. When I work on a project in another Claude Code session, that session sends a progress report to the planner's API, and the task updates itself.</p>
+    <p class="sub">I wrote the specification and designed the interaction. The code was written with Claude Code. The interface is in Chinese because I built it for myself; the screenshots use demo data.</p>
+
+    <figure>
+      <img src="assets/tp-schedule.png" alt="Day view with a timeline of planned blocks, a safety line showing today's minimum and a task pool" loading="lazy">
+      <figcaption>Day view. The "safety line" at the top shows the minimum for today (5h 5m) and a suggested amount per task with a deadline. On the right is the pool of unscheduled tasks.</figcaption>
+    </figure>
+
+    <div class="pair">
+      <figure>
+        <img src="assets/tp-detail.png" alt="Task detail with progress reports sent by Claude Code, subtasks and a timer" loading="lazy">
+        <figcaption>Task detail. Progress reports from Claude Code update the percentage, the subtasks and the time spent.</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/tp-stats.png" alt="Statistics: time per day, time per category, weekly rhythm and project progress" loading="lazy">
+        <figcaption>Statistics over the last 30 days.</figcaption>
+      </figure>
+    </div>
+
+    <h3>How it fits together</h3>
+    <ul class="clean">
+      <li><strong>Front end:</strong> React 18, TypeScript, Vite, Tailwind, TanStack Query, ECharts and drag-and-drop scheduling.</li>
+      <li><strong>Back end:</strong> Express and TypeScript, Prisma with SQLite (10 data models), 11 REST route groups and zod validation.</li>
+      <li><strong>Progress API:</strong> other sessions <code>POST</code> a JSON report. The server validates it, applies it, stores the old values for undo, and offers a dry-run preview. If the server is offline, reports wait in an inbox and are applied on the next start.</li>
+      <li><strong>Daily check:</strong> a script asks the local Claude Code CLI whether each tracked folder made real progress, judging from file diffs only.</li>
+    </ul>
+<pre>POST /api/progress-reports
+{
+  "schema": "planner.progress/v1",
+  "taskId": 1,
+  "progress": { "summary": "Added McNemar tests and bootstrap CIs", "percent": 70,
+                "next": ["Write the report"] },
+  "subtasks": [{ "title": "Statistical tests", "done": true }],
+  "timeSpent": { "minutes": 120 }
+}</pre>
+
+    <div class="links">
+      <a class="btn primary" href="https://github.com/TJiewgnil/task-planner">Code and README on GitHub</a>
+    </div>
+    <div class="chips">
+      <span class="chip">TypeScript</span><span class="chip">Node.js · Express</span><span class="chip">Prisma · SQLite</span>
+      <span class="chip">React · Vite</span><span class="chip">zod</span><span class="chip">REST API</span><span class="chip">Claude Code CLI</span>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">Lingwei Zhao · lingwei@chalmers.se · Last updated November 2026</div>
+</footer>
+
+</body>
+</html>

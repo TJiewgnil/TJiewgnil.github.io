@@ -22,7 +22,7 @@
   row.appendChild(chip("all", allLabel, cards.length));
   Object.keys(labels).forEach(function (k) { if (counts[k]) row.appendChild(chip(k, labels[k], counts[k])); });
 
-  function apply(key) {
+  function apply(key, keepHash) {
     var shown = 0;
     cards.forEach(function (c) {
       var ok = key === "all" || (" " + c.getAttribute("data-tech") + " ").indexOf(" " + key + " ") >= 0;
@@ -31,10 +31,12 @@
     });
     row.querySelectorAll(".fchip").forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-key") === key ? "true" : "false"); });
     status.textContent = fmt.replace("{n}", shown).replace("{t}", cards.length);
+    if (keepHash) return;
     try { if (key === "all") history.replaceState(null, "", location.pathname); else history.replaceState(null, "", "#" + key); } catch (e) { /* ignore */ }
   }
+  // #<tech> opens a filtered view; any other hash (#rag, #driveagent ...) is a card anchor, so leave it
   var start = (location.hash || "").slice(1);
-  apply(counts[start] ? start : "all");
+  if (counts[start]) apply(start); else apply("all", true);
 
   // bar chart grows when it comes into view
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;

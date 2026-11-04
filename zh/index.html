@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>赵凌葳 · 项目展示</title>
+<title>赵凌葳 · 项目集</title>
 <link rel="alternate" hreflang="en" href="https://tjiewgnil.github.io/">
-<meta name="description" content="三个用 Claude Code 做的项目：LLM 在驾驶智能体里到底在哪儿有用、一个 TypeScript 全栈任务管理应用，以及每日邮件摘要。">
+<meta name="description" content="赵凌葳的项目：LLM 评测、检索、生成模型、强化学习、实时图形渲染与全栈开发。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Overpass:wght@700;800&family=Overpass+Mono:wght@400;600;700&family=Noto+Sans+SC:wght@700;800&display=swap">
 <link rel="stylesheet" href="../assets/site.css">
 <style>
-  /* Chinese page: CJK bold sans for headings (signage feel), system CJK sans for body */
-  :root { --display: "Overpass", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif; --body: "Atkinson Hyperlegible", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif; }
-  h1 { letter-spacing: 0; line-height: 1.12; }
+  :root { --display: "Overpass", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+          --body: "Atkinson Hyperlegible", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif; }
+  body { line-height: 1.75; }
 </style>
 </head>
 <body>
@@ -22,198 +22,194 @@
   <div class="wrap">
     <nav class="langbar" aria-label="语言"><a href="../" hreflang="en" lang="en">English</a><span aria-current="page">中文</span></nav>
     <p class="name">赵凌葳 Lingwei Zhao · 查尔姆斯理工大学 计算机科学硕士</p>
-    <h1>LLM <em>到底</em>能帮驾驶智能体做什么？</h1>
-    <p class="lede">我在 nuScenes 驾驶数据集上搭了一个会调用工具的 LLM 智能体，并和更简单的方法比较。每个测试只跑一次，判定规则事先写好。往下滚动看结论，后面还有两个用 Claude Code 做的项目。</p>
+    <h1>项目集</h1>
+    <p class="lede">七个项目，涵盖 LLM 评测、检索、生成模型、强化学习、实时图形渲染和全栈开发。可以在下方按技术栈筛选。</p>
     <div class="meta">
       <span>lingwei@chalmers.se</span>
       <span>瑞典 哥德堡</span>
       <a href="https://github.com/TJiewgnil">github.com/TJiewgnil</a>
     </div>
-    <nav class="jump" aria-label="项目">
-      <a href="#driveagent"><span class="sign">1</span>DriveAgent</a>
-      <a href="#taskplanner"><span class="sign">2</span>任务管理智能体</a>
-      <a href="#gmaildigest"><span class="sign">3</span>Gmail Digest</a>
-    </nav>
-    <p class="how"><strong>我的工作方式。</strong>研究问题、实验设计和通过 / 不通过的标准由我来定，每个结果我都亲自核对。大部分代码由 Claude Code 编写，我负责审查、运行和使用。这三个项目都是这样做出来的。</p>
   </div>
 </header>
 
-<div class="wrap"><div class="lane" role="presentation"></div></div>
+<div class="filters">
+  <div class="wrap">
+    <span class="label" id="filter-label">技术栈</span>
+    <div class="chiprow" role="group" aria-labelledby="filter-label" data-all="全部"></div>
+    <span class="status" aria-live="polite" data-format="显示 {t} 个项目中的 {n} 个">显示 7 个项目中的 7 个</span>
+  </div>
+</div>
+<script type="application/json" id="tech-labels">{"python":"Python","pytorch":"PyTorch","numpy":"NumPy","llm":"LLM","retrieval":"检索 (BM25, FAISS)","stats":"统计检验","typescript":"TypeScript","react":"React","node":"Node.js","sql":"SQL / SQLite","api":"Web API","cpp":"C++","opengl":"OpenGL / GLSL"}</script>
 
 <main class="wrap">
+  <div class="grid">
 
-  <!-- ============ DriveAgent ============ -->
-  <section class="project" id="driveagent">
-    <p class="kicker"><span class="sign">1</span>DriveAgent · Python、Claude API、nuScenes · 2026 年 10 月</p>
-    <h2>一个驾驶 LLM 智能体，分五步检验</h2>
-    <p class="sub">智能体调用感知工具，分五段推理，规划未来 3 秒的轨迹。我把它和能完成同样任务的最简单方法做了比较。</p>
-
-    <div class="story">
-      <nav class="rail" aria-label="叙事步骤">
-        <a href="#s-plan"><span class="sign">1</span>规划</a>
-        <a href="#s-reason"><span class="sign">2</span>推理</a>
-        <a href="#s-match"><span class="sign">3</span>匹配</a>
-        <a href="#s-design"><span class="sign">4</span>设计</a>
-        <a href="#s-evidence"><span class="sign">5</span>证据</a>
-      </nav>
-
-      <div class="steps">
-        <article class="step" id="s-plan">
-          <div class="label"><span class="sign">1</span>规划</div>
-          <h3>在轨迹规划上，LLM 没有带来可靠的提升。</h3>
-          <div class="big">0.609<small>m</small></div>
-          <div class="unit">18 维特征 MLP 的 L2 误差，6,019 帧验证集</div>
-          <p>一个在 CPU 上一分钟就能训完的小 MLP，误差比 LLM 智能体更低，12 个蒸馏小模型也没有一个超过它。加入乘客指令、前视摄像头和地图语义，都没有改变这个结果。</p>
-        </article>
-
-        <article class="step" id="s-reason">
-          <div class="label"><span class="sign">2</span>推理</div>
-          <h3>写出来的推理，几乎没有改变它的答案。</h3>
-          <div class="big warn"><span data-to="197">197</span><small>/ 200 帧</small></div>
-          <div class="unit">输出和检索到的参考轨迹相差不到 5 cm</div>
-          <p>智能体写了五段推理，但只要输入里有参考轨迹，它基本就在照抄。蒸馏出来的小模型也一样：去掉参考输入后，误差升到 1.162 m。</p>
-        </article>
-
-        <article class="step" id="s-match">
-          <div class="label"><span class="sign">3</span>匹配</div>
-          <h3>把乘客的话对应到物体：这里 LLM 有用。</h3>
-          <div class="chart grow" role="img" aria-label="397 条 Talk2Car 指令上的准确率：关键词规则 53.1%，零样本 CLIP 68.5%，看前视图的 Claude Haiku 81.6%">
-            <div class="title">乘客说的是哪个物体？</div>
-            <div class="note">每种方法用的都是同一批 397 条留出 Talk2Car 指令和同一组候选物体。准确率，%。</div>
-            <div class="row"><span class="label-text">关键词规则</span><div class="track"><div class="fill road" style="--w:53.1%"></div></div><span class="val">53.1</span></div>
-            <div class="row"><span class="label-text">向量匹配（零样本 CLIP）</span><div class="track"><div class="fill walk" style="--w:68.5%"></div></div><span class="val">68.5</span></div>
-            <div class="row"><span class="label-text">LLM + 前视摄像头画面</span><div class="track"><div class="fill park" style="--w:81.6%"></div></div><span class="val">81.6</span></div>
-          </div>
-          <p>看到摄像头画面后，LLM 找对乘客所指物体的比例高于 CLIP 向量匹配和关键词规则。每条指令换六种说法，领先依然成立。</p>
-        </article>
-
-        <article class="step" id="s-design">
-          <div class="label"><span class="sign">4</span>设计</div>
-          <h3>测试过的方案里最好：LLM 整理，代码决定。</h3>
-          <div class="big">+20<small>个百分点</small></div>
-          <div class="unit">对比同一个 LLM 自己决定，384 条请求</div>
-          <ul class="clean">
-            <li><strong>LLM 只负责整理。</strong>它把乘客的话变成结构化字段：指的哪个物体、要做什么、停在哪、有没有明说要违规。</li>
-            <li><strong>代码负责决定。</strong>确定性规则对照地图检查这些字段，再决定照做、调整、拒绝还是追问。286 条自然说法里判对 89.9%；关键词加同一套代码只有 59.8%。</li>
-            <li><strong>拿不准就问，不乱猜。</strong>在 148 条新收集的指令上，"不吭声地做错"从 44.6%（关键词）降到 8.8%。</li>
-          </ul>
-        </article>
-
-        <article class="step" id="s-evidence">
-          <div class="label"><span class="sign">5</span>证据</div>
-          <h3>每一项比较都在运行前计划好。</h3>
-          <p>LLM 评审先和人工标注比对，一致率达到 95% 才使用。结果都附场景级 bootstrap 置信区间和 McNemar 检验。</p>
-          <figure>
-            <img src="../assets/forest_zh_light.png" alt="森林图：规划方面的比较全部跨过 0；乘客交互方面 LLM 领先 11 到 30 个百分点，8 个区间里有 7 个在 0 以上" loading="lazy">
-            <figcaption>规划方面，所有 95% 置信区间都跨过 0。乘客交互方面，LLM 领先 11–30 个百分点，8 个区间里有 7 个在 0 以上。</figcaption>
-          </figure>
-          <figure>
-            <img src="../assets/case_04_zh.jpg" alt="测试案例：乘客要求停在一个人旁边，那个位置不能停，代码把停车点挪到最近的合法位置" loading="lazy">
-            <figcaption>一个测试案例。LLM 找对了人（#8）并整理出请求；代码发现那个位置不能停，于是挪到最近的合法位置。关键词方法找错了物体。</figcaption>
-          </figure>
-          <div class="links">
-            <a class="btn primary" href="https://github.com/TJiewgnil/DriveAgent/blob/main/README.zh-CN.md">GitHub 上的代码和说明</a>
-            <a class="btn" href="https://github.com/TJiewgnil/DriveAgent/blob/main/docs/report.zh-CN.pdf">技术报告（PDF）</a>
-            <a class="btn" href="https://tjiewgnil.github.io/DriveAgent/">浏览 43 个测试案例</a>
-          </div>
-          <div class="chips">
-            <span class="chip">Claude Haiku / Sonnet API</span><span class="chip">function calling</span><span class="chip">结构化输出</span>
-            <span class="chip">CLIP 对照</span><span class="chip">QLoRA 蒸馏</span><span class="chip">bootstrap CI · McNemar · Holm</span>
-            <span class="chip">API 总花费约 32 美元</span>
-          </div>
-        </article>
+    <!-- 1 DriveAgent (featured) -->
+    <article class="card featured" id="driveagent" data-tech="python pytorch llm stats">
+      <div class="media">
+        <img class="thumb" src="../assets/case_04_zh.jpg" alt="测试案例：乘客要求停在某人旁边；LLM 找到正确的人，代码把停车点移到合法位置" loading="lazy">
+        <p class="cap">一个测试案例：LLM 找到乘客说的那个人（#8）；代码发现那个位置不能停车，把停车点移到了合法位置。</p>
       </div>
-    </div>
-  </section>
+      <div class="body">
+        <span class="badge">重点项目</span>
+        <p class="ctx">个人项目 · 2026 年 10–11 月</p>
+        <h2>DriveAgent：LLM 在驾驶智能体里到底哪里有用？</h2>
+        <p class="what">在 nuScenes 驾驶数据集上搭建一个会调用工具的 LLM 智能体，规划 3 秒轨迹、处理乘客指令，并和更简单的方法对比。每项测试只跑一次，规则事先写定。</p>
+        <div class="mini grow" role="img" aria-label="397 条 Talk2Car 指令上的准确率：关键词规则 53.1%，零样本 CLIP 68.5%，LLM 加相机图像 81.6%">
+          <div class="t">乘客指的是哪个物体？（397 条指令，%）</div>
+          <div class="row"><span class="lt">关键词规则</span><div class="track"><div class="fill road" style="--w:53.1%"></div></div><span class="val">53.1</span></div>
+          <div class="row"><span class="lt">零样本 CLIP</span><div class="track"><div class="fill walk" style="--w:68.5%"></div></div><span class="val">68.5</span></div>
+          <div class="row"><span class="lt">LLM + 相机图像</span><div class="track"><div class="fill park" style="--w:81.6%"></div></div><span class="val">81.6</span></div>
+        </div>
+        <ul class="results">
+          <li>LLM 负责把请求整理成结构化信息，确定性代码执行地图规则：286 条请求正确率 <b>89.9%</b>，比 LLM 单独决策高约 <b>20</b> 个百分点。</li>
+          <li>不确定时系统会先询问而不是乱猜：在 148 条新指令上，"不吭声地做错"从 44.6% 降到 <b>8.8%</b>。</li>
+          <li>轨迹规划上，18 个特征的 MLP 在 6,019 帧上 L2 误差 <b>0.609 m</b>，LLM 没有带来可靠提升；给它参考轨迹时，200 帧中有 <b>197</b> 帧直接照抄。</li>
+        </ul>
+        <dl class="tags">
+          <dt>技术栈</dt>
+          <dd><span class="tech" data-k="python">Python</span><span class="tech" data-k="llm">LLM</span><span class="tech" data-k="pytorch">PyTorch</span><span class="tech">QLoRA</span><span class="tech">CLIP</span><span class="tech">nuScenes</span><span class="tech" data-k="stats">Bootstrap · McNemar</span></dd>
+          <dt>能力</dt>
+          <dd><span class="skill">LLM 系统</span><span class="skill">评测设计</span><span class="skill">统计检验</span><span class="skill">自动驾驶数据</span></dd>
+        </dl>
+        <div class="links">
+          <a href="https://github.com/TJiewgnil/DriveAgent/blob/main/README.zh-CN.md">代码</a>
+          <a href="https://github.com/TJiewgnil/DriveAgent/blob/main/docs/report.zh-CN.pdf">报告（PDF）</a>
+          <a href="https://tjiewgnil.github.io/DriveAgent/">43 个测试案例</a>
+        </div>
+      </div>
+    </article>
 
-  <div class="lane" role="presentation"></div>
+    <!-- 2 RAG -->
+    <article class="card" id="rag" data-tech="python llm retrieval stats">
+      <img class="thumb contain" src="../assets/rag-reliability.png" alt="九种检索器与提示组合的错误回答率、可回答覆盖率和答案 F1 柱状图" loading="lazy">
+      <div class="body">
+        <p class="ctx">课程项目 · 深度机器学习 · 2026 年 9–10 月</p>
+        <h2>LLM 什么时候该回答？RAG 中的拒答</h2>
+        <p class="what">在 20,000 个段落上对比 BM25、稠密检索和混合检索，用三种提示在 300 道 SQuAD v2 题上测试，其中一半在证据里找不到答案。</p>
+        <ul class="results">
+          <li>明确的拒答指令把错误回答率从 0.22–0.24 降到 <b>0.13–0.17</b>。</li>
+          <li>"有引用才回答、否则拒答"的提示把答案 F1 从 0.40–0.46 提高到 <b>0.58–0.65</b>。</li>
+          <li>在 2,700 次生成上做配对检验，得出成本规则：当一次错误回答的代价超过 <b>1.6–4.4</b> 次正确回答时，拒答更划算。</li>
+        </ul>
+        <dl class="tags">
+          <dt>技术栈</dt>
+          <dd><span class="tech" data-k="python">Python</span><span class="tech" data-k="retrieval">BM25</span><span class="tech" data-k="retrieval">FAISS</span><span class="tech">bge 向量</span><span class="tech" data-k="llm">LLM</span><span class="tech">NLI</span><span class="tech" data-k="stats">McNemar · Holm</span></dd>
+          <dt>能力</dt>
+          <dd><span class="skill">检索</span><span class="skill">实验设计</span><span class="skill">LLM 可靠性</span></dd>
+        </dl>
+        <div class="links"><a href="https://github.com/TJiewgnil/rag-cite-or-abstain">代码</a></div>
+      </div>
+    </article>
 
-  <!-- ============ Task Planner ============ -->
-  <section class="project col" id="taskplanner">
-    <p class="kicker"><span class="sign">2</span>任务管理智能体 · TypeScript、Node.js、React · 2026 年 10 月</p>
-    <h2>一个能接收 Claude Code 进度汇报的全栈应用</h2>
-    <p class="sub">我每天都在用的本地任务管理工具。它把一天的安排排在时间轴上，算出今天至少要投入多少才能按时完成各项任务，同时记录用时、给出统计。我在别的项目里用 Claude Code 工作时，那个会话会通过接口把进度报告发给它，对应任务就自动更新。</p>
-    <p class="sub">需求文档和交互是我设计的，代码由 Claude Code 编写。界面可以在中英文之间切换，截图用的是演示数据。</p>
+    <!-- 3 Diffusion -->
+    <article class="card" id="diffusion" data-tech="python pytorch">
+      <img class="thumb contain" src="../assets/diffusion-sets.png" alt="上排：1,024 个点组成的训练形状；下排：集合去噪器生成的形状" loading="lazy">
+      <div class="body">
+        <p class="ctx">课程项目 · 图像分析 · 2026 年春</p>
+        <h2>从零实现扩散模型</h2>
+        <p class="what">从公式推导出发，用 PyTorch 实现 DDPM：一维闭式解、二维逐点去噪，以及面向 1,024 个点集合的置换等变去噪器。</p>
+        <ul class="results">
+          <li>集合去噪器共享的全局特征消除了逐点独立去噪产生的离群点。</li>
+          <li>扩展：在 MNIST 上训练 <b>1,570</b> 万参数、带自注意力的 U-Net，加入无分类器引导（单张 T4 GPU，fp16 + EMA）。</li>
+        </ul>
+        <dl class="tags">
+          <dt>技术栈</dt>
+          <dd><span class="tech" data-k="python">Python</span><span class="tech" data-k="pytorch">PyTorch</span><span class="tech">U-Net</span><span class="tech">GPU 训练</span></dd>
+          <dt>能力</dt>
+          <dd><span class="skill">生成模型</span><span class="skill">从推导到代码</span></dd>
+        </dl>
+      </div>
+    </article>
 
-    <figure>
-      <img src="../assets/tp-schedule-zh.png" alt="日程视图：时间轴上的安排块、显示今日最低投入的安全线和任务池" loading="lazy">
-      <figcaption>日程视图。顶部的"安全线"显示今天至少要投入的时间（5h5m），以及每个有截止日期的任务今天建议投入多少；右侧是还没排进时间轴的任务池。</figcaption>
-    </figure>
-    <div class="pair">
-      <figure>
-        <img src="../assets/tp-detail-zh.png" alt="任务详情：Claude Code 发来的进度报告、子任务和计时器" loading="lazy">
-        <figcaption>任务详情。Claude Code 发来的进度报告会更新完成度、子任务和用时。</figcaption>
-      </figure>
-      <figure>
-        <img src="../assets/tp-stats-zh.png" alt="数据统计：每天用时、各分类用时、一周节奏和项目进度" loading="lazy">
-        <figcaption>最近 30 天的数据统计。</figcaption>
-      </figure>
-    </div>
+    <!-- 4 RL -->
+    <article class="card" id="rl" data-tech="python numpy pytorch">
+      <img class="thumb contain" src="../assets/rl-a2c.png" alt="CartPole-v1 上带熵正则的 A2C 学习曲线，达到 475 分目标" loading="lazy">
+      <div class="body">
+        <p class="ctx">课程作业 · 机器学习前沿专题 · 2026 年 9–10 月 · 小组</p>
+        <h2>强化学习与多臂老虎机</h2>
+        <p class="what">手写实现策略梯度和基于价值的方法，并设计了一个自己的老虎机策略。</p>
+        <ul class="results">
+          <li>用 NumPy 和手推梯度实现 REINFORCE；PyTorch 版 A2C 在 <b>369</b> 回合内解决 CartPole-v1。</li>
+          <li>乐观初始化让表格 Q-learning 在 RiverSwim 上的回报提高约 <b>6.7</b> 倍。</li>
+          <li>方差自适应 UCB 在 500 次实验中把平均遗憾从 21.8（Thompson 采样）降到 <b>13.5</b>。</li>
+        </ul>
+        <dl class="tags">
+          <dt>技术栈</dt>
+          <dd><span class="tech" data-k="python">Python</span><span class="tech" data-k="numpy">NumPy</span><span class="tech" data-k="pytorch">PyTorch</span><span class="tech">Gymnasium</span></dd>
+          <dt>能力</dt>
+          <dd><span class="skill">强化学习</span><span class="skill">算法设计</span></dd>
+        </dl>
+      </div>
+    </article>
 
-    <h3>整体结构</h3>
-    <ul class="clean">
-      <li><strong>前端：</strong>React 18、TypeScript、Vite、Tailwind、TanStack Query、ECharts，支持拖拽排期。</li>
-      <li><strong>后端：</strong>Express + TypeScript，Prisma + SQLite（10 个数据模型），11 组 REST 接口，用 zod 校验。</li>
-      <li><strong>进度接口：</strong>其他会话 <code>POST</code> 一份 JSON 报告，服务端校验后写入，并保存旧值以便撤销，也可以先试运行预览。服务没开时，报告先进收件箱，下次启动时自动写入。</li>
-      <li><strong>每日检查：</strong>一个脚本调用本机的 Claude Code CLI，只看文件变化，判断每个追踪的文件夹有没有实质进展。</li>
-    </ul>
-<pre>POST /api/progress-reports
-{
-  "schema": "planner.progress/v1",
-  "taskId": 1,
-  "progress": { "summary": "加了 McNemar 检验和 bootstrap 置信区间", "percent": 70,
-                "next": ["写报告"] },
-  "subtasks": [{ "title": "统计检验", "done": true }],
-  "timeSpent": { "minutes": 120 }
-}</pre>
-    <div class="links">
-      <a class="btn primary" href="https://github.com/TJiewgnil/task-planner/blob/main/README.zh-CN.md">GitHub 上的代码和说明</a>
-    </div>
-    <div class="chips">
-      <span class="chip">TypeScript</span><span class="chip">Node.js · Express</span><span class="chip">Prisma · SQLite</span>
-      <span class="chip">React · Vite</span><span class="chip">zod</span><span class="chip">REST API</span><span class="chip">Claude Code CLI</span>
-    </div>
-  </section>
+    <!-- 5 Terrain -->
+    <article class="card" id="terrain" data-tech="cpp opengl">
+      <img class="thumb" src="../assets/terrain-final.jpg" alt="渲染出的峡湾地形：带纹理的山体、湖泊和森林按区块加载" loading="lazy">
+      <div class="body">
+        <p class="ctx">课程项目 · 高级计算机图形学 · 2026 年 4–5 月 · 3 人小组</p>
+        <h2>程序化地形渲染器</h2>
+        <p class="what">由噪声生成、围绕相机按区块加载的无限 3D 地形。我负责植被（按生物群落和坡度放置、L-system 树、GPU 实例化）和地形材质（按高度和坡度的 7 层纹理过渡、平滑法线、水下光吸收）。</p>
+        <ul class="results">
+          <li>性能优化后，植物几何量降到约 <b>30%</b>，顶点吞吐量降低约 <b>40%</b>。</li>
+          <li>树木片元开销降低约 <b>67%</b>；每棵树三角形 380 → <b>250</b>；植被区块 81 → <b>29</b>。</li>
+        </ul>
+        <dl class="tags">
+          <dt>技术栈</dt>
+          <dd><span class="tech" data-k="cpp">C++</span><span class="tech" data-k="opengl">OpenGL</span><span class="tech" data-k="opengl">GLSL</span></dd>
+          <dt>能力</dt>
+          <dd><span class="skill">实时图形</span><span class="skill">GPU 性能优化</span><span class="skill">程序化生成</span></dd>
+        </dl>
+      </div>
+    </article>
 
-  <div class="lane" role="presentation"></div>
+    <!-- 6 Task Planner -->
+    <article class="card" id="taskplanner" data-tech="typescript react node sql api">
+      <img class="thumb" src="../assets/tp-schedule-zh.png" alt="任务规划器的日视图：时间轴、安全线和任务池" loading="lazy">
+      <div class="body">
+        <p class="ctx">个人项目 · 2026 年 10 月</p>
+        <h2>Task Planner：全栈任务规划应用</h2>
+        <p class="what">在时间轴上排一天的日程，算出每个截止日期今天至少要做多少，记录用时并给出统计。其他项目的脚本会向它的 API 提交进度报告，任务进度自动更新。</p>
+        <ul class="results">
+          <li><b>10</b> 个数据模型、<b>11</b> 组 REST 路由，输入经过模式校验。</li>
+          <li>进度 API 支持预演、撤销，以及离线收件箱（下次启动时自动应用）。</li>
+          <li>界面支持中文和英文。</li>
+        </ul>
+        <dl class="tags">
+          <dt>技术栈</dt>
+          <dd><span class="tech" data-k="typescript">TypeScript</span><span class="tech" data-k="react">React</span><span class="tech" data-k="node">Node.js</span><span class="tech" data-k="node">Express</span><span class="tech" data-k="sql">Prisma · SQLite</span><span class="tech" data-k="api">REST API</span></dd>
+          <dt>能力</dt>
+          <dd><span class="skill">全栈开发</span><span class="skill">API 设计</span><span class="skill">数据建模</span></dd>
+        </dl>
+        <div class="links"><a href="https://github.com/TJiewgnil/task-planner">代码</a></div>
+      </div>
+    </article>
 
-  <!-- ============ Gmail Digest ============ -->
-  <section class="project col" id="gmaildigest">
-    <p class="kicker"><span class="sign">3</span>Gmail Digest · Python、Gmail API、Claude Code routine · 2026 年 10 月</p>
-    <h2>把所有邮箱汇成一份每日摘要</h2>
-    <p class="sub">我把学校邮箱和个人邮箱都转发到同一个 Gmail。每天由 Claude Code 云端 routine 读取过去 24 小时的邮件，按一份纯文本提示词里的规则分类。然后它给我发一封简短的摘要：哪些需要处理、哪些是真人写来的，其余的只用一行统计。</p>
+    <!-- 7 Gmail Digest -->
+    <article class="card" id="gmaildigest" data-tech="python llm api">
+      <img class="thumb" src="../assets/digest-zh.png" alt="每日摘要邮件示例：今日重点、待办和来自真人的消息" loading="lazy">
+      <div class="body">
+        <p class="ctx">个人项目 · 2026 年 10 月</p>
+        <h2>Gmail Digest：所有邮箱的每日摘要</h2>
+        <p class="what">多个邮箱转发到同一个 Gmail。云端定时任务通过 Gmail API 读取最近 24 小时的邮件，LLM 按纯文本提示里的规则分类，每天发出一封简短摘要。示例使用虚构邮件。</p>
+        <ul class="results">
+          <li>摘要列出需要处理的事和真人来信，其余邮件折叠成一行计数。</li>
+          <li>只用 Python 标准库（约 <b>770</b> 行）；配置向导完成 OAuth 授权并测试收发。</li>
+        </ul>
+        <dl class="tags">
+          <dt>技术栈</dt>
+          <dd><span class="tech" data-k="python">Python</span><span class="tech" data-k="api">Gmail API</span><span class="tech" data-k="api">OAuth 2.0</span><span class="tech" data-k="llm">LLM</span></dd>
+          <dt>能力</dt>
+          <dd><span class="skill">API 集成</span><span class="skill">自动化</span></dd>
+        </dl>
+        <div class="links"><a href="https://github.com/TJiewgnil/gmail-digest">代码</a></div>
+      </div>
+    </article>
 
-    <div class="flow" role="img" aria-label="流程：其他邮箱转发到 Gmail；fetch_inbox.py 通过 Gmail API 读取过去 24 小时；Claude 按 ROUTINE.md 筛选和总结；send_digest.py 发出摘要；手机收到通知">
-      <div class="step-box">其他邮箱<small>转发到 Gmail</small></div><span class="arr">→</span>
-      <div class="step-box">fetch_inbox.py<small>Gmail API，过去 24 小时</small></div><span class="arr">→</span>
-      <div class="step-box">Claude<small>按 ROUTINE.md 筛选、总结</small></div><span class="arr">→</span>
-      <div class="step-box">send_digest.py<small>Gmail API</small></div><span class="arr">→</span>
-      <div class="step-box">手机<small>每天一条通知</small></div>
-    </div>
-
-    <figure class="narrow">
-      <img src="../assets/digest-zh.png" alt="每日邮件摘要示例：今日重点、需行动、真人直接联系，其他邮件折叠成一行统计" loading="lazy">
-      <figcaption>一份示例摘要，里面的邮件都是虚构的。</figcaption>
-    </figure>
-
-    <h3>设计取舍</h3>
-    <ul class="clean">
-      <li><strong>走 Gmail API（HTTPS）。</strong>routine 的云端沙箱封了 IMAP 和 SMTP，所以收信和发信都通过 Gmail API。</li>
-      <li><strong>不需要 API key。</strong>筛选和总结由运行 routine 的 Claude 自己完成。规则写在 <code>ROUTINE.md</code> 里，谁都可以改。</li>
-      <li><strong>只用标准库。</strong>Python 约 770 行，不用 <code>pip install</code>。配置向导会走完 OAuth 授权、写好配置，并测试收信和发信。</li>
-      <li><strong>方便别人复用。</strong>配置、转发其他邮箱、手机通知都有中英文分步指南。</li>
-    </ul>
-    <div class="links">
-      <a class="btn primary" href="https://github.com/TJiewgnil/gmail-digest/blob/main/README.zh-CN.md">GitHub 上的代码和说明</a>
-    </div>
-    <div class="chips">
-      <span class="chip">Python 标准库</span><span class="chip">Gmail API · OAuth</span><span class="chip">Claude Code 云端 routine</span><span class="chip">用提示词做配置</span>
-    </div>
-  </section>
-
+  </div>
 </main>
 
 <footer><div class="wrap"><div class="lane" role="presentation"></div><p>赵凌葳 Lingwei Zhao · lingwei@chalmers.se · 2026 年 11 月更新</p></div></footer>
-<script src="../assets/story.js"></script>
+<script src="../assets/portfolio.js"></script>
 </body>
 </html>

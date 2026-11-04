@@ -38,11 +38,16 @@ p { margin: 0; }
 .langbar a { color: var(--muted); }
 .langbar a:hover { color: var(--ink); background: var(--track); }
 .langbar span { background: var(--ink); color: var(--bg); }
-.name { font: 600 13px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--junction); margin-bottom: 12px; }
-:lang(zh) .name { text-transform: none; letter-spacing: .02em; }
-h1 { font-size: clamp(40px, 6.6vw, 72px); line-height: 1; font-weight: 800; letter-spacing: -.025em; margin-bottom: 16px; }
-:lang(zh) h1 { letter-spacing: 0; }
-.lede { font-size: 18.5px; color: var(--muted); max-width: 720px; margin-bottom: 18px; }
+/* kicker (what the page is) → name (largest) → degree line → one-line summary → contact */
+.kicker { display: flex; align-items: center; gap: 12px; font: 600 13px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--junction); margin-bottom: 14px; }
+.kicker::before { content: ""; width: 34px; height: 4px; background: var(--junction); border-radius: 1px; }
+:lang(zh) .kicker { letter-spacing: .12em; }
+h1 { font-size: clamp(44px, 7.4vw, 84px); line-height: 1; font-weight: 800; letter-spacing: -.03em; margin-bottom: 14px; }
+:lang(zh) h1 { letter-spacing: .02em; }
+h1 .alt { font-size: .42em; font-weight: 700; letter-spacing: -.01em; color: var(--muted); margin-left: .25em; white-space: nowrap; }
+.role { font-size: 19px; font-weight: 700; color: var(--ink); margin-bottom: 14px; }
+.nw { white-space: nowrap; }
+.lede { font-size: 17.5px; color: var(--muted); max-width: 720px; margin-bottom: 18px; }
 .meta { display: flex; flex-wrap: wrap; gap: 6px 22px; font: 14px var(--mono); color: var(--muted); }
 .lane { height: 4px; background: repeating-linear-gradient(90deg, var(--junction) 0 30px, transparent 30px 56px); opacity: .5; }
 

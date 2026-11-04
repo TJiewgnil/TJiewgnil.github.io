@@ -46,29 +46,26 @@
 
     <!-- 1 DriveAgent (featured) -->
     <article class="card featured" id="driveagent" data-tech="python pytorch llm stats">
-      <div class="media">
-        <img class="thumb" src="../assets/case_04_zh.jpg" alt="测试案例：乘客要求停在某人旁边；LLM 找到正确的人，代码把停车点移到合法位置" loading="lazy">
-        <p class="cap">一个测试案例：LLM 找到乘客说的那个人（#8）；代码发现那个位置不能停车，把停车点移到了合法位置。</p>
-      </div>
       <div class="body">
-        <div class="col">
         <span class="badge">重点项目</span>
         <p class="ctx">个人项目 · 2026 年 10–11 月</p>
         <h2>DriveAgent：LLM 在驾驶智能体里到底哪里有用？</h2>
         <p class="what">在 nuScenes 驾驶数据集上搭建一个会调用工具的 LLM 智能体，规划 3 秒轨迹、处理乘客指令，并和更简单的方法对比。每项测试只跑一次，规则事先写定。</p>
-        <ul class="results">
-          <li>LLM 负责把请求整理成结构化信息，确定性代码执行地图规则：286 条请求正确率 <b>89.9%</b>，比 LLM 单独决策高约 <b>20</b> 个百分点。</li>
-          <li>不确定时系统会先询问而不是乱猜：在 148 条新指令上，"不吭声地做错"从 44.6% 降到 <b>8.8%</b>。</li>
-          <li>轨迹规划上，18 个特征的 MLP 在 6,019 帧上 L2 误差 <b>0.609 m</b>，LLM 没有带来可靠提升；给它参考轨迹时，200 帧中有 <b>197</b> 帧直接照抄。</li>
-        </ul>
-        </div>
-        <div class="col">
+        <figure class="fig">
+          <img class="thumb" src="../assets/case_04_zh.jpg" alt="测试案例：乘客要求停在某人旁边；LLM 找到正确的人，代码把停车点移到合法位置" loading="lazy">
+          <figcaption class="cap">一个测试案例：LLM 找到乘客说的那个人（#8）；代码发现那个位置不能停车，把停车点移到了合法位置。</figcaption>
+        </figure>
         <div class="mini grow" role="img" aria-label="397 条 Talk2Car 指令上的准确率：关键词规则 53.1%，零样本 CLIP 68.5%，LLM 加相机图像 81.6%">
           <div class="t">乘客指的是哪个物体？（397 条指令，%）</div>
           <div class="row"><span class="lt">关键词规则</span><div class="track"><div class="fill road" style="--w:53.1%"></div></div><span class="val">53.1</span></div>
           <div class="row"><span class="lt">零样本 CLIP</span><div class="track"><div class="fill walk" style="--w:68.5%"></div></div><span class="val">68.5</span></div>
           <div class="row"><span class="lt">LLM + 相机图像</span><div class="track"><div class="fill park" style="--w:81.6%"></div></div><span class="val">81.6</span></div>
         </div>
+        <ul class="results">
+          <li>LLM 负责把请求整理成结构化信息，确定性代码执行地图规则：286 条请求正确率 <b>89.9%</b>，比 LLM 单独决策高约 <b>20</b> 个百分点。</li>
+          <li>不确定时系统会先询问而不是乱猜：在 148 条新指令上，"不吭声地做错"从 44.6% 降到 <b>8.8%</b>。</li>
+          <li>轨迹规划上，18 个特征的 MLP 在 6,019 帧上 L2 误差 <b>0.609 m</b>，LLM 没有带来可靠提升；给它参考轨迹时，200 帧中有 <b>197</b> 帧直接照抄。</li>
+        </ul>
         <dl class="tags">
           <dt>技术栈</dt>
           <dd><span class="tech" data-k="python">Python</span><span class="tech" data-k="llm">LLM</span><span class="tech" data-k="pytorch">PyTorch</span><span class="tech">QLoRA</span><span class="tech">CLIP</span><span class="tech">nuScenes</span><span class="tech" data-k="stats">Bootstrap · McNemar</span></dd>
@@ -79,7 +76,6 @@
           <a href="https://github.com/TJiewgnil/DriveAgent/blob/main/README.zh-CN.md">代码</a>
           <a href="https://github.com/TJiewgnil/DriveAgent/blob/main/docs/report.zh-CN.pdf">报告（PDF）</a>
           <a href="https://tjiewgnil.github.io/DriveAgent/">43 个测试案例</a>
-        </div>
         </div>
       </div>
     </article>

@@ -41,29 +41,26 @@
 
     <!-- 1 DriveAgent (featured) -->
     <article class="card featured" id="driveagent" data-tech="python pytorch llm stats">
-      <div class="media">
-        <img class="thumb" src="assets/case_04_en.jpg" alt="Test case: passenger asks to stop next to a person; the LLM picks the right person and the code moves the stop to a legal spot" loading="lazy">
-        <p class="cap">One test case: the LLM finds the person the passenger means (#8); the code sees the exact spot is illegal and moves the stop to a legal one.</p>
-      </div>
       <div class="body">
-        <div class="col">
         <span class="badge">Featured</span>
         <p class="ctx">Individual project · Oct–Nov 2026</p>
         <h2>DriveAgent: where does an LLM help a driving agent?</h2>
         <p class="what">A tool-using LLM agent on the nuScenes driving dataset that plans 3-second trajectories and handles passenger requests, tested against simpler methods. Every test ran once, under rules written down in advance.</p>
-        <ul class="results">
-          <li>The LLM structures each request and deterministic code applies the map rules: <b>89.9%</b> correct on 286 requests, about <b>20</b> points above the LLM deciding alone.</li>
-          <li>When unsure, the system asks instead of guessing: silent wrong actions fell from 44.6% to <b>8.8%</b> on 148 new commands.</li>
-          <li>For planning, an 18-feature MLP reached <b>0.609 m</b> L2 on 6,019 frames and the LLM gave no reliable gain; given a reference trajectory, it copied it in <b>197</b> of 200 frames.</li>
-        </ul>
-        </div>
-        <div class="col">
+        <figure class="fig">
+          <img class="thumb" src="assets/case_04_en.jpg" alt="Test case: passenger asks to stop next to a person; the LLM picks the right person and the code moves the stop to a legal spot" loading="lazy">
+          <figcaption class="cap">One test case: the LLM finds the person the passenger means (#8); the code sees the exact spot is illegal and moves the stop to a legal one.</figcaption>
+        </figure>
         <div class="mini grow" role="img" aria-label="Accuracy on 397 Talk2Car commands: keyword rules 53.1 percent, zero-shot CLIP 68.5 percent, LLM with the camera image 81.6 percent">
           <div class="t">Which object does the passenger mean? (397 commands, %)</div>
           <div class="row"><span class="lt">Keyword rules</span><div class="track"><div class="fill road" style="--w:53.1%"></div></div><span class="val">53.1</span></div>
           <div class="row"><span class="lt">Zero-shot CLIP</span><div class="track"><div class="fill walk" style="--w:68.5%"></div></div><span class="val">68.5</span></div>
           <div class="row"><span class="lt">LLM + camera image</span><div class="track"><div class="fill park" style="--w:81.6%"></div></div><span class="val">81.6</span></div>
         </div>
+        <ul class="results">
+          <li>The LLM structures each request and deterministic code applies the map rules: <b>89.9%</b> correct on 286 requests, about <b>20</b> points above the LLM deciding alone.</li>
+          <li>When unsure, the system asks instead of guessing: silent wrong actions fell from 44.6% to <b>8.8%</b> on 148 new commands.</li>
+          <li>For planning, an 18-feature MLP reached <b>0.609 m</b> L2 on 6,019 frames and the LLM gave no reliable gain; given a reference trajectory, it copied it in <b>197</b> of 200 frames.</li>
+        </ul>
         <dl class="tags">
           <dt>Tech stack</dt>
           <dd><span class="tech" data-k="python">Python</span><span class="tech" data-k="llm">LLM</span><span class="tech" data-k="pytorch">PyTorch</span><span class="tech">QLoRA</span><span class="tech">CLIP</span><span class="tech">nuScenes</span><span class="tech" data-k="stats">Bootstrap · McNemar</span></dd>
@@ -74,7 +71,6 @@
           <a href="https://github.com/TJiewgnil/DriveAgent">Code</a>
           <a href="https://github.com/TJiewgnil/DriveAgent/blob/main/docs/report.pdf">Report (PDF)</a>
           <a href="https://tjiewgnil.github.io/DriveAgent/">43 test cases</a>
-        </div>
         </div>
       </div>
     </article>

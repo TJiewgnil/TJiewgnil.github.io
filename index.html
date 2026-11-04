@@ -2,109 +2,131 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Lingwei Zhao · Projects</title>
 <link rel="alternate" hreflang="zh-CN" href="https://tjiewgnil.github.io/zh/">
-<meta name="description" content="Three projects built with Claude Code: an evaluation of where LLMs help a driving agent, a full-stack TypeScript task planner, and a daily email digest.">
+<meta name="description" content="Three projects built with Claude Code: where an LLM helps a driving agent, a full-stack TypeScript task planner, and a daily email digest.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Crimson+Pro:wght@500;600&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Overpass:wght@700;800&family=Overpass+Mono:wght@400;600;700&display=swap">
 <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
-<header class="top">
+
+<header class="hero">
   <div class="wrap">
     <nav class="langbar" aria-label="Language"><span aria-current="page">English</span><a href="zh/" hreflang="zh-CN" lang="zh-CN">中文</a></nav>
     <p class="name">Lingwei Zhao · MSc Computer Science, Chalmers University of Technology</p>
-    <h1>Three projects I built with Claude Code</h1>
-    <p class="lede">An evaluation of where a language model helps a driving agent, a full-stack TypeScript app that I use every day, and a daily email digest that runs as a Claude Code routine.</p>
+    <h1>Where does an LLM <em>actually</em> help a driving agent?</h1>
+    <p class="lede">I built a tool-using LLM agent on the nuScenes driving dataset and tested it against simpler methods. Every test ran once, under rules written down in advance. Scroll through what I found, then two more projects I built with Claude Code.</p>
     <div class="meta">
       <span>lingwei@chalmers.se</span>
       <span>Gothenburg, Sweden</span>
       <a href="https://github.com/TJiewgnil">github.com/TJiewgnil</a>
     </div>
-    <div class="jump">
-      <a href="#driveagent">DriveAgent: LLMs for a driving agent</a>
-      <a href="#taskplanner">Task Planner: TypeScript full stack</a>
-      <a href="#gmaildigest">gmail-digest: a daily email routine</a>
-    </div>
-    <p class="how"><strong>How I work.</strong> I decide the questions, design the experiments and the pass/fail rules, and check every result. Claude Code writes most of the code, and I review, run and use it. All three were built this way.</p>
+    <nav class="jump" aria-label="Projects">
+      <a href="#driveagent"><span class="sign">1</span>DriveAgent</a>
+      <a href="#taskplanner"><span class="sign">2</span>Task Planner</a>
+      <a href="#gmaildigest"><span class="sign">3</span>Gmail Digest</a>
+    </nav>
+    <p class="how"><strong>How I work.</strong> I decide the questions, design the experiments and the pass/fail rules, and check every result. Claude Code writes most of the code, and I review, run and use it. All three projects were built this way.</p>
   </div>
 </header>
+
+<div class="wrap"><div class="lane" role="presentation"></div></div>
 
 <main class="wrap">
 
   <!-- ============ DriveAgent ============ -->
   <section class="project" id="driveagent">
-    <p class="kicker">Project 1 · Python, Claude API, nuScenes · Oct 2026</p>
-    <h2>DriveAgent: where does an LLM actually help a driving agent?</h2>
-    <p class="sub">I built a tool-using LLM agent on the nuScenes driving dataset and compared it with simpler methods on held-out test sets. Each test was run once, under rules written down in advance.</p>
+    <p class="kicker"><span class="sign">1</span>DriveAgent · Python, Claude API, nuScenes · Oct 2026</p>
+    <h2>An LLM agent for driving, tested in five steps</h2>
+    <p class="sub">The agent queries perception tools, reasons in five stages and plans a 3-second trajectory. I compared it with the simplest methods that could do the same job.</p>
 
-    <div class="grid3">
-      <div class="stat">
-        <div class="big">0.609 m</div>
-        <div class="vs">L2 error of an 18-feature MLP, 6,019 validation frames</div>
-        <div class="what"><strong>Planning: no reliable gain from the LLM.</strong> The MLP has lower error than the LLM agent, and none of 12 distilled students beat it.</div>
+    <div class="story">
+      <nav class="rail" aria-label="Story steps">
+        <a href="#s-plan"><span class="sign">1</span>Planning</a>
+        <a href="#s-reason"><span class="sign">2</span>Reasoning</a>
+        <a href="#s-match"><span class="sign">3</span>Matching</a>
+        <a href="#s-design"><span class="sign">4</span>Design</a>
+        <a href="#s-evidence"><span class="sign">5</span>Evidence</a>
+      </nav>
+
+      <div class="steps">
+        <article class="step" id="s-plan">
+          <div class="label"><span class="sign">1</span>Planning</div>
+          <h3>For planning, the LLM gave no reliable gain.</h3>
+          <div class="big">0.609<small>m</small></div>
+          <div class="unit">L2 error of an 18-feature MLP, 6,019 validation frames</div>
+          <p>A small MLP that trains in a minute on a CPU had lower error than the LLM agent, and none of 12 distilled students beat it. Passenger instructions, the front camera and map semantics did not change that.</p>
+        </article>
+
+        <article class="step" id="s-reason">
+          <div class="label"><span class="sign">2</span>Reasoning</div>
+          <h3>Its written reasoning rarely changed its answer.</h3>
+          <div class="big warn"><span data-to="197">197</span><small>/ 200 frames</small></div>
+          <div class="unit">output within 5 cm of a retrieved reference trajectory</div>
+          <p>The agent wrote five stages of reasoning. Yet with a reference trajectory in its input, it mostly copied it. The distilled students did the same: without the reference, their error rose to 1.162 m.</p>
+        </article>
+
+        <article class="step" id="s-match">
+          <div class="label"><span class="sign">3</span>Matching</div>
+          <h3>Matching words to objects: here the LLM helps.</h3>
+          <div class="chart grow" role="img" aria-label="Accuracy on 397 Talk2Car commands: keyword rules 53.1 percent, zero-shot CLIP 68.5 percent, Claude Haiku with the camera image 81.6 percent">
+            <div class="title">Which object does the passenger mean?</div>
+            <div class="note">Same 397 held-out Talk2Car commands and the same candidate objects for every method. Accuracy, %.</div>
+            <div class="row"><span class="label-text">Keyword rules</span><div class="track"><div class="fill road" style="--w:53.1%"></div></div><span class="val">53.1</span></div>
+            <div class="row"><span class="label-text">Embeddings (zero-shot CLIP)</span><div class="track"><div class="fill walk" style="--w:68.5%"></div></div><span class="val">68.5</span></div>
+            <div class="row"><span class="label-text">LLM with the camera image</span><div class="track"><div class="fill park" style="--w:81.6%"></div></div><span class="val">81.6</span></div>
+          </div>
+          <p>Given the camera image, the LLM found the object a passenger meant more often than CLIP embeddings or keyword rules. Its lead held across six rewrites of each command.</p>
+        </article>
+
+        <article class="step" id="s-design">
+          <div class="label"><span class="sign">4</span>Design</div>
+          <h3>Best design tested: the LLM structures, code decides.</h3>
+          <div class="big">+20<small>points</small></div>
+          <div class="unit">vs the same LLM deciding alone, 384 requests</div>
+          <ul class="clean">
+            <li><strong>The LLM only structures.</strong> It turns a passenger's words into fields: which object, what request, where to stop, any explicit rule-breaking.</li>
+            <li><strong>Code decides.</strong> Deterministic rules check those fields against the map and choose to comply, adjust, refuse or ask: 89.9% right on 286 natural requests, against 59.8% for keywords with the same code.</li>
+            <li><strong>Ask instead of guess.</strong> On 148 fresh crowd-sourced commands, silent wrong actions fell from 44.6% (keywords) to 8.8%.</li>
+          </ul>
+        </article>
+
+        <article class="step" id="s-evidence">
+          <div class="label"><span class="sign">5</span>Evidence</div>
+          <h3>Every comparison was planned before it was run.</h3>
+          <p>An LLM judge was used only after it agreed with human labels in 95% of cases. Results come with scene-level bootstrap confidence intervals and McNemar tests.</p>
+          <figure>
+            <img src="assets/forest_en_light.png" alt="Forest plot: every planning comparison crosses zero; in passenger interaction the LLM leads by 11 to 30 points, with 7 of 8 intervals above zero" loading="lazy">
+            <figcaption>In planning, every 95% interval crosses zero. In passenger interaction, the LLM leads by 11–30 points, and 7 of the 8 intervals lie above zero.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/case_04_en.jpg" alt="Example case: passenger asks to stop next to a person; the exact spot is illegal, so the code moves the stop to the nearest legal spot" loading="lazy">
+            <figcaption>One test case. The LLM picks the right person (#8) and extracts the request. The code sees that the exact spot is illegal and moves the stop to a legal one. The keyword pipeline picks the wrong object.</figcaption>
+          </figure>
+          <div class="links">
+            <a class="btn primary" href="https://github.com/TJiewgnil/DriveAgent">Code and README on GitHub</a>
+            <a class="btn" href="https://github.com/TJiewgnil/DriveAgent/blob/main/docs/report.pdf">Technical report (PDF, 10 pages)</a>
+            <a class="btn" href="https://tjiewgnil.github.io/DriveAgent/">Browse 43 test cases</a>
+          </div>
+          <div class="chips">
+            <span class="chip">Claude Haiku / Sonnet API</span><span class="chip">function calling</span><span class="chip">structured output</span>
+            <span class="chip">CLIP baseline</span><span class="chip">QLoRA distillation</span><span class="chip">bootstrap CIs · McNemar · Holm</span>
+            <span class="chip">about $32 of API cost in total</span>
+          </div>
+        </article>
       </div>
-      <div class="stat">
-        <div class="big">81.6%</div>
-        <div class="vs">vs 68.5% CLIP, 53.1% keyword rules</div>
-        <div class="what"><strong>Matching words to objects: the LLM helps.</strong> It finds the object a passenger means more often than CLIP or keyword rules.</div>
-      </div>
-      <div class="stat">
-        <div class="big">+20 pts</div>
-        <div class="vs">vs the same LLM deciding alone, 384 requests</div>
-        <div class="what"><strong>Best design tested.</strong> The LLM turns messy input into structured facts, and deterministic code applies the rules.</div>
-      </div>
-    </div>
-
-    <div class="chart" role="img" aria-label="Accuracy on 397 Talk2Car commands: keyword rules 53.1 percent, zero-shot CLIP 68.5 percent, Claude Haiku with the camera image 81.6 percent">
-      <div class="title">A matching problem: which object does the passenger mean?</div>
-      <div class="note">Same 397 held-out Talk2Car commands and the same candidate objects for every method. Accuracy, %.</div>
-      <div class="row"><span class="label">Keyword rules</span><div class="track"><div class="fill" style="width:53.1%;background:var(--b1)"></div></div><span class="val">53.1</span></div>
-      <div class="row"><span class="label">Embeddings (zero-shot CLIP)</span><div class="track"><div class="fill" style="width:68.5%;background:var(--b2)"></div></div><span class="val">68.5</span></div>
-      <div class="row"><span class="label">LLM with the camera image</span><div class="track"><div class="fill" style="width:81.6%;background:var(--b3)"></div></div><span class="val">81.6</span></div>
-    </div>
-
-    <h3>What the system does with a request</h3>
-    <ul class="clean">
-      <li><strong>The LLM only structures.</strong> It turns a passenger's words into fields: which object, what request, where to stop, any explicit rule-breaking.</li>
-      <li><strong>Code decides.</strong> Deterministic rules check those fields against the map and choose to comply, adjust, refuse or ask. On 286 natural requests this was right 89.9% of the time, against 59.8% for keywords with the same code.</li>
-      <li><strong>Ask instead of guess.</strong> On 148 fresh crowd-sourced commands, silent wrong actions fell from 44.6% (keywords) to 8.8%.</li>
-      <li><strong>Judge checked first.</strong> An LLM judge was used only after it agreed with human labels in 95% of cases. Results come with scene-level bootstrap confidence intervals and McNemar tests.</li>
-    </ul>
-
-    <figure>
-      <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="assets/forest_en_dark.png">
-        <img src="assets/forest_en_light.png" alt="Forest plot: every planning comparison crosses zero; in passenger interaction the LLM leads by 11 to 30 points, with 7 of 8 intervals above zero" loading="lazy">
-      </picture>
-      <figcaption>Every comparison was planned before it was run. In planning, every 95% interval crosses zero. In passenger interaction, the LLM leads by 11–30 points, and 7 of the 8 intervals lie above zero.</figcaption>
-    </figure>
-
-    <figure>
-      <img src="assets/case_04_en.jpg" alt="Example case: passenger asks to stop next to a person; the exact spot is illegal, so the code moves the stop to the nearest legal spot" loading="lazy">
-      <figcaption>One test case. The LLM picks the right person (#8) and extracts the request. The code sees that the exact spot is illegal and moves the stop to a legal one. The keyword pipeline picks the wrong object.</figcaption>
-    </figure>
-
-    <div class="links">
-      <a class="btn primary" href="https://github.com/TJiewgnil/DriveAgent">Code and README on GitHub</a>
-      <a class="btn" href="https://github.com/TJiewgnil/DriveAgent/blob/main/docs/report.pdf">Technical report (PDF, 10 pages)</a>
-      <a class="btn" href="https://tjiewgnil.github.io/DriveAgent/">Browse 43 test cases</a>
-    </div>
-    <div class="chips">
-      <span class="chip">Claude Haiku / Sonnet API</span><span class="chip">function calling</span><span class="chip">structured output</span>
-      <span class="chip">CLIP baseline</span><span class="chip">QLoRA distillation</span><span class="chip">bootstrap CIs · McNemar · Holm</span>
-      <span class="chip">about $32 of API cost in total</span>
     </div>
   </section>
 
-  <hr class="sep">
+  <div class="lane" role="presentation"></div>
 
   <!-- ============ Task Planner ============ -->
-  <section class="project" id="taskplanner">
-    <p class="kicker">Project 2 · TypeScript, Node.js, React · Oct 2026</p>
-    <h2>Task Planner: a full-stack app that Claude Code sessions report to</h2>
+  <section class="project col" id="taskplanner">
+    <p class="kicker"><span class="sign">2</span>Task Planner · TypeScript, Node.js, React · Oct 2026</p>
+    <h2>A full-stack app that Claude Code sessions report to</h2>
     <p class="sub">A local planner I use every day. It lays out the day on a timeline, works out how much I need to do today to meet each deadline, tracks time and shows statistics. When I work on a project in another Claude Code session, that session sends a progress report to the planner's API, and the task updates itself.</p>
     <p class="sub">I wrote the specification and designed the interaction. The code was written with Claude Code. The interface switches between English and Chinese; the screenshots use demo data.</p>
 
@@ -112,7 +134,6 @@
       <img src="assets/tp-schedule-en.png" alt="Day view with a timeline of planned blocks, a safety line showing today's minimum and a task pool" loading="lazy">
       <figcaption>Day view. The safety line at the top shows the minimum for today (5h 5m) and a suggested amount per task with a deadline. On the right is the pool of unscheduled tasks.</figcaption>
     </figure>
-
     <div class="pair">
       <figure>
         <img src="assets/tp-detail-en.png" alt="Task detail with progress reports sent by Claude Code, subtasks and a timer" loading="lazy">
@@ -140,7 +161,6 @@
   "subtasks": [{ "title": "Statistical tests", "done": true }],
   "timeSpent": { "minutes": 120 }
 }</pre>
-
     <div class="links">
       <a class="btn primary" href="https://github.com/TJiewgnil/task-planner">Code and README on GitHub</a>
     </div>
@@ -150,20 +170,20 @@
     </div>
   </section>
 
-  <hr class="sep">
+  <div class="lane" role="presentation"></div>
 
-  <!-- ============ gmail-digest ============ -->
-  <section class="project" id="gmaildigest">
-    <p class="kicker">Project 3 · Python, Gmail API, Claude Code routine · Oct 2026</p>
-    <h2>gmail-digest: one daily digest for all my mailboxes</h2>
+  <!-- ============ Gmail Digest ============ -->
+  <section class="project col" id="gmaildigest">
+    <p class="kicker"><span class="sign">3</span>Gmail Digest · Python, Gmail API, Claude Code routine · Oct 2026</p>
+    <h2>One daily digest for all my mailboxes</h2>
     <p class="sub">I forward my university and personal mailboxes into one Gmail account. Every day a Claude Code cloud routine reads the last 24 hours of mail and sorts it by rules written in a plain-text prompt. It then emails me a short digest: what needs action, what real people wrote, and one line that counts everything else.</p>
 
     <div class="flow" role="img" aria-label="Pipeline: other mailboxes forward into Gmail; fetch_inbox.py reads the last 24 hours through the Gmail API; Claude filters and summarises by ROUTINE.md; send_digest.py emails the digest; the phone shows a notification">
-      <div class="step">Other mailboxes<small>forward into Gmail</small></div><span class="arr">→</span>
-      <div class="step">fetch_inbox.py<small>Gmail API, last 24 h</small></div><span class="arr">→</span>
-      <div class="step">Claude<small>filters and summarises by ROUTINE.md</small></div><span class="arr">→</span>
-      <div class="step">send_digest.py<small>Gmail API</small></div><span class="arr">→</span>
-      <div class="step">Phone<small>one notification a day</small></div>
+      <div class="step-box">Other mailboxes<small>forward into Gmail</small></div><span class="arr">→</span>
+      <div class="step-box">fetch_inbox.py<small>Gmail API, last 24 h</small></div><span class="arr">→</span>
+      <div class="step-box">Claude<small>filters and summarises by ROUTINE.md</small></div><span class="arr">→</span>
+      <div class="step-box">send_digest.py<small>Gmail API</small></div><span class="arr">→</span>
+      <div class="step-box">Phone<small>one notification a day</small></div>
     </div>
 
     <figure class="narrow">
@@ -178,7 +198,6 @@
       <li><strong>Standard library only.</strong> About 770 lines of Python and no <code>pip install</code>. A setup wizard runs the OAuth flow, writes the config, and tests fetching and sending.</li>
       <li><strong>Made for others to reuse.</strong> Step-by-step guides in English and Chinese cover setup, mail forwarding and phone notifications.</li>
     </ul>
-
     <div class="links">
       <a class="btn primary" href="https://github.com/TJiewgnil/gmail-digest">Code and README on GitHub</a>
     </div>
@@ -189,9 +208,7 @@
 
 </main>
 
-<footer>
-  <div class="wrap">Lingwei Zhao · lingwei@chalmers.se · Last updated November 2026</div>
-</footer>
-
+<footer><div class="wrap"><div class="lane" role="presentation"></div><p>Lingwei Zhao · lingwei@chalmers.se · Last updated November 2026</p></div></footer>
+<script src="assets/story.js"></script>
 </body>
 </html>

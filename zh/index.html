@@ -39,13 +39,13 @@
     <span class="status" aria-live="polite" data-format="显示 {t} 个项目中的 {n} 个">显示 7 个项目中的 7 个</span>
   </div>
 </div>
-<script type="application/json" id="tech-labels">{"python":"Python","pytorch":"PyTorch","numpy":"NumPy","llm":"LLM","retrieval":"RAG","stats":"统计检验","typescript":"TypeScript","react":"React","node":"Node.js","sql":"SQL / SQLite","api":"Web API","cpp":"C++","opengl":"OpenGL / GLSL"}</script>
+<script type="application/json" id="tech-labels">{"python":"Python","pytorch":"PyTorch","llm":"LLM","web":"TypeScript / React","cpp":"C++ / OpenGL"}</script>
 
 <main class="wrap">
   <div class="grid">
 
     <!-- 1 DriveAgent (featured) -->
-    <article class="card featured" id="driveagent" data-tech="python pytorch llm stats">
+    <article class="card featured" id="driveagent" data-tech="python pytorch llm">
       <div class="body">
         <span class="badge">重点项目</span>
         <p class="ctx">个人项目 · 2026 年 10–11 月</p>
@@ -68,7 +68,7 @@
         </ul>
         <dl class="tags">
           <dt>技术栈</dt>
-          <dd><span class="tech" data-k="python">Python</span><span class="tech" data-k="llm">LLM</span><span class="tech" data-k="pytorch">PyTorch</span><span class="tech">QLoRA</span><span class="tech">CLIP</span><span class="tech">nuScenes</span><span class="tech" data-k="stats">Bootstrap · McNemar</span></dd>
+          <dd><span class="tech" data-k="python">Python</span><span class="tech" data-k="llm">LLM</span><span class="tech" data-k="pytorch">PyTorch</span><span class="tech">QLoRA</span><span class="tech">CLIP</span><span class="tech">nuScenes</span></dd>
           <dt>能力</dt>
           <dd><span class="skill">LLM 系统</span><span class="skill">评测设计</span><span class="skill">统计检验</span><span class="skill">自动驾驶数据</span></dd>
         </dl>
@@ -81,7 +81,7 @@
     </article>
 
     <!-- 2 RAG -->
-    <article class="card" id="rag" data-tech="python llm retrieval stats">
+    <article class="card" id="rag" data-tech="python llm">
       <img class="thumb contain" src="../assets/rag-reliability.png" alt="九种检索器与提示组合的错误回答率、可回答覆盖率和答案 F1 柱状图" loading="lazy">
       <div class="body">
         <p class="ctx">课程项目 · 深度机器学习 · 2026 年 9–10 月</p>
@@ -94,9 +94,9 @@
         </ul>
         <dl class="tags">
           <dt>技术栈</dt>
-          <dd><span class="tech" data-k="python">Python</span><span class="tech" data-k="retrieval">BM25</span><span class="tech" data-k="retrieval">FAISS</span><span class="tech">bge 向量</span><span class="tech" data-k="llm">LLM</span><span class="tech">NLI</span><span class="tech" data-k="stats">McNemar · Holm</span></dd>
+          <dd><span class="tech" data-k="python">Python</span><span class="tech">BM25</span><span class="tech">FAISS</span><span class="tech">bge 向量</span><span class="tech" data-k="llm">LLM</span><span class="tech">NLI</span></dd>
           <dt>能力</dt>
-          <dd><span class="skill">检索</span><span class="skill">实验设计</span><span class="skill">LLM 可靠性</span></dd>
+          <dd><span class="skill">检索</span><span class="skill">实验设计</span><span class="skill">统计检验</span><span class="skill">LLM 可靠性</span></dd>
         </dl>
         <div class="links"><a href="https://github.com/TJiewgnil/rag-cite-or-abstain/blob/main/README.zh-CN.md">代码</a></div>
       </div>
@@ -115,16 +115,16 @@
         </ul>
         <dl class="tags">
           <dt>技术栈</dt>
-          <dd><span class="tech" data-k="python">Python</span><span class="tech" data-k="pytorch">PyTorch</span><span class="tech">U-Net</span><span class="tech">GPU 训练</span></dd>
+          <dd><span class="tech" data-k="python">Python</span><span class="tech" data-k="pytorch">PyTorch</span><span class="tech">U-Net</span></dd>
           <dt>能力</dt>
-          <dd><span class="skill">生成模型</span><span class="skill">从推导到代码</span></dd>
+          <dd><span class="skill">生成模型</span><span class="skill">GPU 训练</span><span class="skill">从推导到代码</span></dd>
         </dl>
         <div class="links"><a href="https://github.com/TJiewgnil/diffusion-from-scratch/blob/main/README.zh-CN.md">代码</a></div>
       </div>
     </article>
 
     <!-- 4 RL -->
-    <article class="card" id="rl" data-tech="python numpy pytorch">
+    <article class="card" id="rl" data-tech="python pytorch">
       <img class="thumb contain" src="../assets/rl-a2c.png" alt="CartPole-v1 上带熵正则的 A2C 学习曲线，达到 475 分目标" loading="lazy">
       <div class="body">
         <p class="ctx">课程作业 · 机器学习前沿专题 · 2026 年 9–10 月 · 小组</p>
@@ -137,7 +137,7 @@
         </ul>
         <dl class="tags">
           <dt>技术栈</dt>
-          <dd><span class="tech" data-k="python">Python</span><span class="tech" data-k="numpy">NumPy</span><span class="tech" data-k="pytorch">PyTorch</span><span class="tech">Gymnasium</span></dd>
+          <dd><span class="tech" data-k="python">Python</span><span class="tech" data-k="pytorch">PyTorch</span><span class="tech">Gymnasium</span></dd>
           <dt>能力</dt>
           <dd><span class="skill">强化学习</span><span class="skill">算法设计</span></dd>
         </dl>
@@ -146,7 +146,7 @@
     </article>
 
     <!-- 5 Terrain -->
-    <article class="card" id="terrain" data-tech="cpp opengl">
+    <article class="card" id="terrain" data-tech="cpp">
       <img class="thumb" src="../assets/terrain-final.jpg" alt="渲染出的峡湾地形：带纹理的山体、湖泊和森林按区块加载" loading="lazy">
       <div class="body">
         <p class="ctx">课程项目 · 高级计算机图形学 · 2026 年 4–5 月 · 3 人小组</p>
@@ -158,7 +158,7 @@
         </ul>
         <dl class="tags">
           <dt>技术栈</dt>
-          <dd><span class="tech" data-k="cpp">C++</span><span class="tech" data-k="opengl">OpenGL</span><span class="tech" data-k="opengl">GLSL</span></dd>
+          <dd><span class="tech" data-k="cpp">C++</span><span class="tech" data-k="cpp">OpenGL</span><span class="tech" data-k="cpp">GLSL</span></dd>
           <dt>能力</dt>
           <dd><span class="skill">实时图形</span><span class="skill">GPU 性能优化</span><span class="skill">程序化生成</span></dd>
         </dl>
@@ -167,7 +167,7 @@
     </article>
 
     <!-- 6 Task Planner -->
-    <article class="card" id="taskplanner" data-tech="typescript react node sql api">
+    <article class="card" id="taskplanner" data-tech="web">
       <img class="thumb" src="../assets/tp-schedule-zh.png" alt="任务规划器的日视图：时间轴、安全线和任务池" loading="lazy">
       <div class="body">
         <p class="ctx">个人项目 · 2026 年 10 月</p>
@@ -180,7 +180,7 @@
         </ul>
         <dl class="tags">
           <dt>技术栈</dt>
-          <dd><span class="tech" data-k="typescript">TypeScript</span><span class="tech" data-k="react">React</span><span class="tech" data-k="node">Node.js</span><span class="tech" data-k="node">Express</span><span class="tech" data-k="sql">Prisma · SQLite</span><span class="tech" data-k="api">REST API</span></dd>
+          <dd><span class="tech" data-k="web">TypeScript</span><span class="tech" data-k="web">React</span><span class="tech">Node.js</span><span class="tech">Express</span><span class="tech">Prisma · SQLite</span><span class="tech">REST API</span></dd>
           <dt>能力</dt>
           <dd><span class="skill">全栈开发</span><span class="skill">API 设计</span><span class="skill">数据建模</span></dd>
         </dl>
@@ -189,7 +189,7 @@
     </article>
 
     <!-- 7 Gmail Digest -->
-    <article class="card" id="gmaildigest" data-tech="python llm api">
+    <article class="card" id="gmaildigest" data-tech="python llm">
       <img class="thumb" src="../assets/digest-zh.png" alt="每日摘要邮件示例：今日重点、待办和来自真人的消息" loading="lazy">
       <div class="body">
         <p class="ctx">个人项目 · 2026 年 10 月</p>
@@ -201,7 +201,7 @@
         </ul>
         <dl class="tags">
           <dt>技术栈</dt>
-          <dd><span class="tech" data-k="python">Python</span><span class="tech" data-k="api">Gmail API</span><span class="tech" data-k="api">OAuth 2.0</span><span class="tech" data-k="llm">LLM</span></dd>
+          <dd><span class="tech" data-k="python">Python</span><span class="tech">Gmail API</span><span class="tech">OAuth 2.0</span><span class="tech" data-k="llm">LLM</span></dd>
           <dt>能力</dt>
           <dd><span class="skill">API 集成</span><span class="skill">自动化</span></dd>
         </dl>

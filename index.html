@@ -34,13 +34,13 @@
     <span class="status" aria-live="polite" data-format="Showing {n} of {t} projects">Showing 7 of 7 projects</span>
   </div>
 </div>
-<script type="application/json" id="tech-labels">{"python":"Python","pytorch":"PyTorch","numpy":"NumPy","llm":"LLM","retrieval":"RAG","stats":"Statistical testing","typescript":"TypeScript","react":"React","node":"Node.js","sql":"SQL / SQLite","api":"Web APIs","cpp":"C++","opengl":"OpenGL / GLSL"}</script>
+<script type="application/json" id="tech-labels">{"python":"Python","pytorch":"PyTorch","llm":"LLM","web":"TypeScript / React","cpp":"C++ / OpenGL"}</script>
 
 <main class="wrap">
   <div class="grid">
 
     <!-- 1 DriveAgent (featured) -->
-    <article class="card featured" id="driveagent" data-tech="python pytorch llm stats">
+    <article class="card featured" id="driveagent" data-tech="python pytorch llm">
       <div class="body">
         <span class="badge">Featured</span>
         <p class="ctx">Individual project · Oct–Nov 2026</p>
@@ -63,7 +63,7 @@
         </ul>
         <dl class="tags">
           <dt>Tech stack</dt>
-          <dd><span class="tech" data-k="python">Python</span><span class="tech" data-k="llm">LLM</span><span class="tech" data-k="pytorch">PyTorch</span><span class="tech">QLoRA</span><span class="tech">CLIP</span><span class="tech">nuScenes</span><span class="tech" data-k="stats">Bootstrap · McNemar</span></dd>
+          <dd><span class="tech" data-k="python">Python</span><span class="tech" data-k="llm">LLM</span><span class="tech" data-k="pytorch">PyTorch</span><span class="tech">QLoRA</span><span class="tech">CLIP</span><span class="tech">nuScenes</span></dd>
           <dt>Skills</dt>
           <dd><span class="skill">LLM systems</span><span class="skill">Evaluation design</span><span class="skill">Statistical testing</span><span class="skill">Autonomous driving data</span></dd>
         </dl>
@@ -76,7 +76,7 @@
     </article>
 
     <!-- 2 RAG -->
-    <article class="card" id="rag" data-tech="python llm retrieval stats">
+    <article class="card" id="rag" data-tech="python llm">
       <img class="thumb contain" src="assets/rag-reliability.png" alt="Bar chart of false-answer rate, answerable coverage and answer F1 for nine retriever and prompt combinations" loading="lazy">
       <div class="body">
         <p class="ctx">Course project · Deep Machine Learning · Sep–Oct 2026</p>
@@ -89,9 +89,9 @@
         </ul>
         <dl class="tags">
           <dt>Tech stack</dt>
-          <dd><span class="tech" data-k="python">Python</span><span class="tech" data-k="retrieval">BM25</span><span class="tech" data-k="retrieval">FAISS</span><span class="tech">bge embeddings</span><span class="tech" data-k="llm">LLM</span><span class="tech">NLI</span><span class="tech" data-k="stats">McNemar · Holm</span></dd>
+          <dd><span class="tech" data-k="python">Python</span><span class="tech">BM25</span><span class="tech">FAISS</span><span class="tech">bge embeddings</span><span class="tech" data-k="llm">LLM</span><span class="tech">NLI</span></dd>
           <dt>Skills</dt>
-          <dd><span class="skill">Retrieval</span><span class="skill">Experiment design</span><span class="skill">LLM reliability</span></dd>
+          <dd><span class="skill">Retrieval</span><span class="skill">Experiment design</span><span class="skill">Statistical testing</span><span class="skill">LLM reliability</span></dd>
         </dl>
         <div class="links"><a href="https://github.com/TJiewgnil/rag-cite-or-abstain">Code</a></div>
       </div>
@@ -110,16 +110,16 @@
         </ul>
         <dl class="tags">
           <dt>Tech stack</dt>
-          <dd><span class="tech" data-k="python">Python</span><span class="tech" data-k="pytorch">PyTorch</span><span class="tech">U-Net</span><span class="tech">GPU training</span></dd>
+          <dd><span class="tech" data-k="python">Python</span><span class="tech" data-k="pytorch">PyTorch</span><span class="tech">U-Net</span></dd>
           <dt>Skills</dt>
-          <dd><span class="skill">Generative models</span><span class="skill">Derivation to code</span></dd>
+          <dd><span class="skill">Generative models</span><span class="skill">GPU training</span><span class="skill">Derivation to code</span></dd>
         </dl>
         <div class="links"><a href="https://github.com/TJiewgnil/diffusion-from-scratch">Code</a></div>
       </div>
     </article>
 
     <!-- 4 RL -->
-    <article class="card" id="rl" data-tech="python numpy pytorch">
+    <article class="card" id="rl" data-tech="python pytorch">
       <img class="thumb contain" src="assets/rl-a2c.png" alt="Learning curve of A2C with entropy regularisation on CartPole-v1; it reaches the 475 target" loading="lazy">
       <div class="body">
         <p class="ctx">Course assignments · Advanced Topics in ML · Sep–Oct 2026 · group</p>
@@ -132,7 +132,7 @@
         </ul>
         <dl class="tags">
           <dt>Tech stack</dt>
-          <dd><span class="tech" data-k="python">Python</span><span class="tech" data-k="numpy">NumPy</span><span class="tech" data-k="pytorch">PyTorch</span><span class="tech">Gymnasium</span></dd>
+          <dd><span class="tech" data-k="python">Python</span><span class="tech" data-k="pytorch">PyTorch</span><span class="tech">Gymnasium</span></dd>
           <dt>Skills</dt>
           <dd><span class="skill">Reinforcement learning</span><span class="skill">Algorithm design</span></dd>
         </dl>
@@ -141,7 +141,7 @@
     </article>
 
     <!-- 5 Terrain -->
-    <article class="card" id="terrain" data-tech="cpp opengl">
+    <article class="card" id="terrain" data-tech="cpp">
       <img class="thumb" src="assets/terrain-final.jpg" alt="Rendered fjord landscape: textured mountains, lakes and forest streamed in chunks" loading="lazy">
       <div class="body">
         <p class="ctx">Course project · Advanced Computer Graphics · Apr–May 2026 · team of 3</p>
@@ -153,7 +153,7 @@
         </ul>
         <dl class="tags">
           <dt>Tech stack</dt>
-          <dd><span class="tech" data-k="cpp">C++</span><span class="tech" data-k="opengl">OpenGL</span><span class="tech" data-k="opengl">GLSL</span></dd>
+          <dd><span class="tech" data-k="cpp">C++</span><span class="tech" data-k="cpp">OpenGL</span><span class="tech" data-k="cpp">GLSL</span></dd>
           <dt>Skills</dt>
           <dd><span class="skill">Real-time graphics</span><span class="skill">GPU performance</span><span class="skill">Procedural generation</span></dd>
         </dl>
@@ -162,7 +162,7 @@
     </article>
 
     <!-- 6 Task Planner -->
-    <article class="card" id="taskplanner" data-tech="typescript react node sql api">
+    <article class="card" id="taskplanner" data-tech="web">
       <img class="thumb" src="assets/tp-schedule-en.png" alt="Day view of the task planner with a timeline, a safety line and a task pool" loading="lazy">
       <div class="body">
         <p class="ctx">Personal project · Oct 2026</p>
@@ -175,7 +175,7 @@
         </ul>
         <dl class="tags">
           <dt>Tech stack</dt>
-          <dd><span class="tech" data-k="typescript">TypeScript</span><span class="tech" data-k="react">React</span><span class="tech" data-k="node">Node.js</span><span class="tech" data-k="node">Express</span><span class="tech" data-k="sql">Prisma · SQLite</span><span class="tech" data-k="api">REST API</span></dd>
+          <dd><span class="tech" data-k="web">TypeScript</span><span class="tech" data-k="web">React</span><span class="tech">Node.js</span><span class="tech">Express</span><span class="tech">Prisma · SQLite</span><span class="tech">REST API</span></dd>
           <dt>Skills</dt>
           <dd><span class="skill">Full-stack development</span><span class="skill">API design</span><span class="skill">Data modelling</span></dd>
         </dl>
@@ -184,7 +184,7 @@
     </article>
 
     <!-- 7 Gmail Digest -->
-    <article class="card" id="gmaildigest" data-tech="python llm api">
+    <article class="card" id="gmaildigest" data-tech="python llm">
       <img class="thumb" src="assets/digest-en.png" alt="Example daily digest email with today's focus, action items and messages from people" loading="lazy">
       <div class="body">
         <p class="ctx">Personal project · Oct 2026</p>
@@ -196,7 +196,7 @@
         </ul>
         <dl class="tags">
           <dt>Tech stack</dt>
-          <dd><span class="tech" data-k="python">Python</span><span class="tech" data-k="api">Gmail API</span><span class="tech" data-k="api">OAuth 2.0</span><span class="tech" data-k="llm">LLM</span></dd>
+          <dd><span class="tech" data-k="python">Python</span><span class="tech">Gmail API</span><span class="tech">OAuth 2.0</span><span class="tech" data-k="llm">LLM</span></dd>
           <dt>Skills</dt>
           <dd><span class="skill">API integration</span><span class="skill">Automation</span></dd>
         </dl>

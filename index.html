@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Lingwei Zhao · Projects</title>
 <link rel="alternate" hreflang="zh-CN" href="https://tjiewgnil.github.io/zh/">
-<meta name="description" content="Projects by Lingwei Zhao: LLM evaluation, retrieval, generative models, reinforcement learning, real-time graphics and full-stack development.">
+<meta name="description" content="Projects by Lingwei Zhao: LLM evaluation, retrieval, object detection, generative models, reinforcement learning, real-time graphics and full-stack development.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Overpass:wght@700;800&family=Overpass+Mono:wght@400;600;700&display=swap">
-<link rel="stylesheet" href="assets/site.css?v=202611041430">
+<link rel="stylesheet" href="assets/site.css?v=202611131211">
 </head>
 <body>
 
@@ -19,7 +19,7 @@
     <p class="kicker">Project portfolio</p>
     <h1>Lingwei Zhao</h1>
     <p class="role">MSc Computer Science, Chalmers University of Technology · <span class="nw">Gothenburg, Sweden</span></p>
-    <p class="lede">Seven projects in LLM evaluation, retrieval, generative models, reinforcement learning, real-time graphics and full-stack development. Filter by tech stack to see the ones you care about.</p>
+    <p class="lede">Eight projects in LLM evaluation, retrieval, object detection, generative models, reinforcement learning, real-time graphics and full-stack development. Filter by tech stack to see the ones you care about.</p>
     <div class="meta">
       <span>lingwei@chalmers.se</span>
       <a href="https://github.com/TJiewgnil">github.com/TJiewgnil</a>
@@ -31,7 +31,7 @@
   <div class="wrap">
     <span class="label" id="filter-label">Tech stack</span>
     <div class="chiprow" role="group" aria-labelledby="filter-label" data-all="All"></div>
-    <span class="status" aria-live="polite" data-format="Showing {n} of {t} projects">Showing 7 of 7 projects</span>
+    <span class="status" aria-live="polite" data-format="Showing {n} of {t} projects">Showing 8 of 8 projects</span>
   </div>
 </div>
 <script type="application/json" id="tech-labels">{"python":"Python","pytorch":"PyTorch","llm":"LLM","web":"TypeScript / React","cpp":"C++ / OpenGL"}</script>
@@ -94,6 +94,27 @@
           <dd><span class="skill">Retrieval</span><span class="skill">Experiment design</span><span class="skill">Statistical testing</span><span class="skill">LLM reliability</span></dd>
         </dl>
         <div class="links"><a href="https://github.com/TJiewgnil/rag-cite-or-abstain">Code</a></div>
+      </div>
+    </article>
+
+    <!-- NightDet-DA -->
+    <article class="card" id="nightdet" data-tech="python pytorch">
+      <img class="thumb contain" src="assets/nightdet-en.png" alt="Bar chart of night mAP: day baseline 6.5, AdaBN 6.5, best self-training student 8.7, Grounding DINO 13.1, NightAug 13.8, upper bound with night labels 19.8" loading="lazy">
+      <div class="body">
+        <p class="ctx">Personal project · Nov 2026</p>
+        <h2>Day-to-night domain adaptation for object detection</h2>
+        <p class="what">A YOLO11s detector trained on daytime nuImages, tested at night, and four ways to close the gap without night labels: augmentation, AdaBN, self-training and a Grounding DINO teacher.</p>
+        <ul class="results">
+          <li>Night mAP fell from <b>42.1</b> (day) to <b>6.5</b>. Night-style augmentation doubled it to <b>13.8</b>, between fine-tuning on <b>100</b> and <b>300</b> labelled night images.</li>
+          <li>Self-training gained at most <b>+2.2</b>: even at a 0.05 threshold the YOLO teacher finds only <b>33%</b> of night objects, and the rest are learned as background.</li>
+          <li>Paired cluster-bootstrap CIs; the <b>34</b>-step pipeline ran unattended on a V100 Spot VM and resumed after preemption.</li>
+        </ul>
+        <dl class="tags">
+          <dt>Tech stack</dt>
+          <dd><span class="tech" data-k="python">Python</span><span class="tech" data-k="pytorch">PyTorch</span><span class="tech">YOLO11</span><span class="tech">Grounding DINO</span><span class="tech">GCP</span></dd>
+          <dt>Skills</dt>
+          <dd><span class="skill">Domain adaptation</span><span class="skill">Experiment design</span><span class="skill">Cloud automation</span></dd>
+        </dl>
       </div>
     </article>
 
@@ -208,6 +229,6 @@
 </main>
 
 <footer><div class="wrap"><div class="lane" role="presentation"></div><p>Lingwei Zhao · lingwei@chalmers.se · Last updated November 2026</p></div></footer>
-<script src="assets/portfolio.js?v=202611041430"></script>
+<script src="assets/portfolio.js?v=202611131211"></script>
 </body>
 </html>

@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>赵凌葳 · 项目集</title>
 <link rel="alternate" hreflang="en" href="https://tjiewgnil.github.io/">
-<meta name="description" content="赵凌葳的项目：LLM 评测、检索、生成模型、强化学习、实时图形渲染与全栈开发。">
+<meta name="description" content="赵凌葳的项目：LLM 评测、检索、目标检测、生成模型、强化学习、实时图形渲染与全栈开发。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Overpass:wght@700;800&family=Overpass+Mono:wght@400;600;700&family=Noto+Sans+SC:wght@700;800&display=swap">
-<link rel="stylesheet" href="../assets/site.css?v=202611041430">
+<link rel="stylesheet" href="../assets/site.css?v=202611131211">
 <style>
   :root { --display: "Overpass", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
           --body: "Atkinson Hyperlegible", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif; }
@@ -24,7 +24,7 @@
     <p class="kicker">项目集</p>
     <h1>赵凌葳 <span class="alt" lang="en">Lingwei Zhao</span></h1>
     <p class="role">查尔姆斯理工大学 计算机科学硕士 · <span class="nw">瑞典 哥德堡</span></p>
-    <p class="lede">七个项目，涵盖 LLM 评测、检索、生成模型、强化学习、实时图形渲染和全栈开发。可以在下方按技术栈筛选。</p>
+    <p class="lede">八个项目，涵盖 LLM 评测、检索、目标检测、生成模型、强化学习、实时图形渲染和全栈开发。可以在下方按技术栈筛选。</p>
     <div class="meta">
       <span>lingwei@chalmers.se</span>
       <a href="https://github.com/TJiewgnil">github.com/TJiewgnil</a>
@@ -36,7 +36,7 @@
   <div class="wrap">
     <span class="label" id="filter-label">技术栈</span>
     <div class="chiprow" role="group" aria-labelledby="filter-label" data-all="全部"></div>
-    <span class="status" aria-live="polite" data-format="显示 {t} 个项目中的 {n} 个">显示 7 个项目中的 7 个</span>
+    <span class="status" aria-live="polite" data-format="显示 {t} 个项目中的 {n} 个">显示 8 个项目中的 8 个</span>
   </div>
 </div>
 <script type="application/json" id="tech-labels">{"python":"Python","pytorch":"PyTorch","llm":"LLM","web":"TypeScript / React","cpp":"C++ / OpenGL"}</script>
@@ -99,6 +99,27 @@
           <dd><span class="skill">检索</span><span class="skill">实验设计</span><span class="skill">统计检验</span><span class="skill">LLM 可靠性</span></dd>
         </dl>
         <div class="links"><a href="https://github.com/TJiewgnil/rag-cite-or-abstain/blob/main/README.zh-CN.md">代码</a></div>
+      </div>
+    </article>
+
+    <!-- NightDet-DA -->
+    <article class="card" id="nightdet" data-tech="python pytorch">
+      <img class="thumb contain" src="../assets/nightdet-zh.png" alt="夜间 mAP 柱状图：白天基线 6.5，AdaBN 6.5，最好的自训练学生 8.7，Grounding DINO 13.1，NightAug 13.8，用夜间标注的上限 19.8" loading="lazy">
+      <div class="body">
+        <p class="ctx">个人项目 · 2026 年 11 月</p>
+        <h2>目标检测的白天到夜间域自适应</h2>
+        <p class="what">用 nuImages 白天图训练 YOLO11s，到夜间测试，再比较四种不用夜间标注的补救方法：数据增强、AdaBN、自训练和 Grounding DINO 老师。</p>
+        <ul class="results">
+          <li>夜间 mAP 从白天的 <b>42.1</b> 降到 <b>6.5</b>。变夜增强把它翻倍到 <b>13.8</b>，介于用 <b>100</b> 张和 <b>300</b> 张夜间标注微调之间。</li>
+          <li>自训练最多只涨 <b>+2.2</b>：阈值降到 0.05，YOLO 老师在夜里也只找到 <b>33%</b> 的物体，其余被学成了背景。</li>
+          <li>用配对 cluster bootstrap 置信区间比较；<b>34</b> 步流程在 V100 Spot 实例上无人值守运行，被回收后自动续训。</li>
+        </ul>
+        <dl class="tags">
+          <dt>技术栈</dt>
+          <dd><span class="tech" data-k="python">Python</span><span class="tech" data-k="pytorch">PyTorch</span><span class="tech">YOLO11</span><span class="tech">Grounding DINO</span><span class="tech">GCP</span></dd>
+          <dt>能力</dt>
+          <dd><span class="skill">域自适应</span><span class="skill">实验设计</span><span class="skill">云端自动化</span></dd>
+        </dl>
       </div>
     </article>
 
@@ -213,6 +234,6 @@
 </main>
 
 <footer><div class="wrap"><div class="lane" role="presentation"></div><p>赵凌葳 Lingwei Zhao · lingwei@chalmers.se · 2026 年 11 月更新</p></div></footer>
-<script src="../assets/portfolio.js?v=202611041430"></script>
+<script src="../assets/portfolio.js?v=202611131211"></script>
 </body>
 </html>

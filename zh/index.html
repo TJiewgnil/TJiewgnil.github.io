@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Overpass:wght@700;800&family=Overpass+Mono:wght@400;600;700&family=Noto+Sans+SC:wght@700;800&display=swap">
-<link rel="stylesheet" href="../assets/site.css?v=202611131211">
+<link rel="stylesheet" href="../assets/site.css?v=202611171930">
 <style>
   :root { --display: "Overpass", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
           --body: "Atkinson Hyperlegible", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif; }
@@ -80,7 +80,28 @@
       </div>
     </article>
 
-    <!-- 2 RAG -->
+    <!-- 2 NightDet-DA -->
+    <article class="card" id="nightdet" data-tech="python pytorch">
+      <img class="thumb contain" src="../assets/nightdet-zh.png" alt="夜间 mAP 柱状图：白天基线 6.5，AdaBN 6.5，最好的自训练学生 8.7，Grounding DINO 13.1，NightAug 13.8，用夜间标注的上限 19.8" loading="lazy">
+      <div class="body">
+        <p class="ctx">个人项目 · 2026 年 11 月</p>
+        <h2>目标检测的白天到夜间域自适应</h2>
+        <p class="what">用 nuImages 白天图训练 YOLO11s，到夜间测试，再比较四种不用夜间标注的补救方法：数据增强、AdaBN、自训练和 Grounding DINO 老师。</p>
+        <ul class="results">
+          <li>夜间 mAP 从白天的 <b>42.1</b> 降到 <b>6.5</b>。变夜增强把它翻倍到 <b>13.8</b>，介于用 <b>100</b> 张和 <b>300</b> 张夜间标注微调之间。</li>
+          <li>自训练最多只涨 <b>+2.2</b>：阈值降到 0.05，YOLO 老师在夜里也只找到 <b>33%</b> 的物体，其余被学成了背景。</li>
+          <li>用配对 cluster bootstrap 置信区间比较；<b>34</b> 步流程在 V100 Spot 实例上无人值守运行，被回收后自动续训。</li>
+        </ul>
+        <dl class="tags">
+          <dt>技术栈</dt>
+          <dd><span class="tech" data-k="python">Python</span><span class="tech" data-k="pytorch">PyTorch</span><span class="tech">YOLO11</span><span class="tech">Grounding DINO</span><span class="tech">GCP</span></dd>
+          <dt>能力</dt>
+          <dd><span class="skill">域自适应</span><span class="skill">实验设计</span><span class="skill">云端自动化</span></dd>
+        </dl>
+      </div>
+    </article>
+
+    <!-- 3 RAG -->
     <article class="card" id="rag" data-tech="python llm">
       <img class="thumb contain" src="../assets/rag-reliability.png" alt="九种检索器与提示组合的错误回答率、可回答覆盖率和答案 F1 柱状图" loading="lazy">
       <div class="body">
@@ -102,28 +123,7 @@
       </div>
     </article>
 
-    <!-- NightDet-DA -->
-    <article class="card" id="nightdet" data-tech="python pytorch">
-      <img class="thumb contain" src="../assets/nightdet-zh.png" alt="夜间 mAP 柱状图：白天基线 6.5，AdaBN 6.5，最好的自训练学生 8.7，Grounding DINO 13.1，NightAug 13.8，用夜间标注的上限 19.8" loading="lazy">
-      <div class="body">
-        <p class="ctx">个人项目 · 2026 年 11 月</p>
-        <h2>目标检测的白天到夜间域自适应</h2>
-        <p class="what">用 nuImages 白天图训练 YOLO11s，到夜间测试，再比较四种不用夜间标注的补救方法：数据增强、AdaBN、自训练和 Grounding DINO 老师。</p>
-        <ul class="results">
-          <li>夜间 mAP 从白天的 <b>42.1</b> 降到 <b>6.5</b>。变夜增强把它翻倍到 <b>13.8</b>，介于用 <b>100</b> 张和 <b>300</b> 张夜间标注微调之间。</li>
-          <li>自训练最多只涨 <b>+2.2</b>：阈值降到 0.05，YOLO 老师在夜里也只找到 <b>33%</b> 的物体，其余被学成了背景。</li>
-          <li>用配对 cluster bootstrap 置信区间比较；<b>34</b> 步流程在 V100 Spot 实例上无人值守运行，被回收后自动续训。</li>
-        </ul>
-        <dl class="tags">
-          <dt>技术栈</dt>
-          <dd><span class="tech" data-k="python">Python</span><span class="tech" data-k="pytorch">PyTorch</span><span class="tech">YOLO11</span><span class="tech">Grounding DINO</span><span class="tech">GCP</span></dd>
-          <dt>能力</dt>
-          <dd><span class="skill">域自适应</span><span class="skill">实验设计</span><span class="skill">云端自动化</span></dd>
-        </dl>
-      </div>
-    </article>
-
-    <!-- 3 Diffusion -->
+    <!-- 4 Diffusion -->
     <article class="card" id="diffusion" data-tech="python pytorch">
       <img class="thumb contain" src="../assets/diffusion-sets.png" alt="上排：1,024 个点组成的训练形状；下排：集合去噪器生成的形状" loading="lazy">
       <div class="body">
@@ -144,7 +144,7 @@
       </div>
     </article>
 
-    <!-- 4 RL -->
+    <!-- 5 RL -->
     <article class="card" id="rl" data-tech="python pytorch">
       <img class="thumb contain" src="../assets/rl-a2c.png" alt="CartPole-v1 上带熵正则的 A2C 学习曲线，达到 475 分目标" loading="lazy">
       <div class="body">
@@ -166,7 +166,7 @@
       </div>
     </article>
 
-    <!-- 5 Terrain -->
+    <!-- 6 Terrain -->
     <article class="card" id="terrain" data-tech="cpp">
       <img class="thumb" src="../assets/terrain-final.jpg" alt="渲染出的峡湾地形：带纹理的山体、湖泊和森林按区块加载" loading="lazy">
       <div class="body">
@@ -187,7 +187,7 @@
       </div>
     </article>
 
-    <!-- 6 Task Planner -->
+    <!-- 7 Task Planner -->
     <article class="card" id="taskplanner" data-tech="web">
       <img class="thumb" src="../assets/tp-schedule-zh.png" alt="任务规划器的日视图：时间轴、安全线和任务池" loading="lazy">
       <div class="body">
@@ -209,7 +209,7 @@
       </div>
     </article>
 
-    <!-- 7 Gmail Digest -->
+    <!-- 8 Gmail Digest -->
     <article class="card" id="gmaildigest" data-tech="python llm">
       <img class="thumb" src="../assets/digest-zh.png" alt="每日摘要邮件示例：今日重点、待办和来自真人的消息" loading="lazy">
       <div class="body">
@@ -234,6 +234,6 @@
 </main>
 
 <footer><div class="wrap"><div class="lane" role="presentation"></div><p>赵凌葳 Lingwei Zhao · lingwei@chalmers.se · 2026 年 11 月更新</p></div></footer>
-<script src="../assets/portfolio.js?v=202611131211"></script>
+<script src="../assets/portfolio.js?v=202611171930"></script>
 </body>
 </html>
